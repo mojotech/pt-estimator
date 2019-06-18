@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "baseUrl": "./client",
+    "paths": {
+      "~*": ["./*"]
+    },
+  },
+  "include": ["client/**/*"]
+}

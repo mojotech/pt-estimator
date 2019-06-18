@@ -1,0 +1,20 @@
+{
+  "name": "pt-estimator",
+  "version": "0.0.1",
+  "description": "estimator",
+  "main": "client/index.js",
+  "repository": "git@github.com:mojotech/pt-estimator.git",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "parcel-bundler": "^1.12.3",
+    "typescript": "^3.5.2"
+  },
+  "scripts": {
+    "start": "parcel client/index.html"
+  },
+  "dependencies": {
+    "react": "^16.0.0",
+    "react-dom": "^16.8.6"
+  }
+}
