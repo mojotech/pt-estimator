@@ -16,6 +16,34 @@ def get_story(proj_id, story_id: nil, uname: nil, password: nil)
   JSON.parse(resp.body)
 end
 
+def get_project(proj_id, uname, password)
+  api_token = auth_user(uname, password)['api_token']
+  con = faraday_builder
+  resp = con.get "/services/v5/projects/#{proj_id}" do |req|
+    req.headers['X-Trackertoken'] = api_token
+  end
+  [JSON.parse(resp.body), api_token]
+end
+
+def put_story_estimate(proj_id, story_id, estimate, uname: nil, password: nil)
+  allowed, api_token = allow_estimate?(proj_id, estimate, uname, password)
+
+  return "Estimate of #{estimate} not allowed in point scale" unless allowed
+
+  con = faraday_builder
+  resp = con.put "/services/v5/projects/#{proj_id}/stories/#{story_id}" do |req|
+    req.headers['X-Trackertoken'] = api_token
+    req.params['estimate'] = estimate
+  end
+  JSON.parse(resp.body)
+end
+
+def allow_estimate?(proj_id, estimate, uname, password)
+  project, api_token = get_project(proj_id, uname, password)
+  scale = project['point_scale'].split(',').map(&:to_i)
+  [scale.include?(estimate), api_token]
+end
+
 def auth_user(uname, password)
   auth_resp = nil
   attempts = 0
