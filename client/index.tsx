@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-console.log('Hello from tsx!')
+import App from '~/app';
 
 ReactDOM.render(
-  <p>Hello</p>,
+  <div><span>Hello</span><App message={100} /></div>,
   document.getElementById('root'),
 )
