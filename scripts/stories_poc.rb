@@ -46,19 +46,35 @@ def create_http_req(uri, request)
 end
 
 def auth_user
+  token_response = nil
+
+  while(token_response.nil?) do 
+    username, password = capture_auth_information
+
+    response = make_auth_request(username, password)
+
+    token_response = response if allow_kind?(response)
+  end
+
+  token_response
+end
+
+def capture_auth_information
   puts 'username:'
   username = gets.chomp
   puts 'password:'
   password = STDIN.noecho(&:gets).chomp
 
+  [username, password]
+end
+
+def make_auth_request(username, password)
   uri = URI.parse('https://www.pivotaltracker.com/services/v5/me')
   request = Net::HTTP::Get.new(uri)
   request.basic_auth(username, password)
-  response = create_http_req(uri, request)
-  return auth_user unless allow_kind?(response)
-
-  response
+  create_http_req(uri, request)
 end
+
 
 def allow_kind?(response)
   kinds = ['me']
