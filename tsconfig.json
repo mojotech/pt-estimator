@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "baseUrl": "./client",
+    "paths": {
+      "~*": ["./*"]
+    },
+    "typeRoots": ["node_modules/@types"],
+    "esModuleInterop": true,
+    "lib": ["dom", "es6"]
+  },
+  "include": ["client/**/*"]
+}

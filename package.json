@@ -1,0 +1,24 @@
+{
+  "name": "pt-estimator",
+  "version": "0.0.1",
+  "description": "estimator",
+  "main": "client/index.js",
+  "repository": "git@github.com:mojotech/pt-estimator.git",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "@types/react": "^16.8.20",
+    "@types/react-dom": "^16.8.4",
+    "cross-env": "^5.2.0",
+    "parcel-bundler": "^1.12.3",
+    "typescript": "^3.5.2"
+  },
+  "scripts": {
+    "start": "./start.sh",
+    "build": "cross-env NODE_ENV=production parcel build client/index.html --public-url ."
+  },
+  "dependencies": {
+    "react": "^16.0.0",
+    "react-dom": "^16.8.6"
+  }
+}
