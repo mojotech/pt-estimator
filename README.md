@@ -20,3 +20,13 @@
 6. rake db:create
 7. cd ..
 8. yarn run develop
+
+## Editor config
+
+There is annoying gotcha with Parcel where hot module reloading breaks after first save for any editor that has safe write.
+https://parceljs.org/hmr.html#safe-write
+
+This includes:
+* vim
+* vscode
+* sublime
