@@ -6,3 +6,21 @@ dist/
 node_modules/
 
 yarn-error.log
+
+# Ignore bundler config.
+/server/.bundle
+
+# Ignore all logfiles and tempfiles.
+/server/log/*
+/server/tmp/*
+!/server/log/.keep
+!/server/tmp/.keep
+
+# Ignore uploaded files in development
+/server/storage/*
+!/server/storage/.keep
+
+.byebug_history
+
+# Ignore master key for decrypting credentials and more.
+/server/config/master.key
