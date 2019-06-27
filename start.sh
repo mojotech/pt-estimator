@@ -3,4 +3,4 @@
 set -e
 
 "$(yarn bin)/tsc" --noEmit --watch &
-"$(yarn bin)/parcel" ./client/index.html
+"$(yarn bin)/parcel" -p 3000 ./client/index.html
