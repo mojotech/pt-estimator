@@ -2,5 +2,5 @@
 
 set -e
 
-"$(npm bin)/tsc" --noEmit --watch &
-"$(npm bin)/parcel" ./client/index.html
+"$(yarn bin)/tsc" --noEmit --watch &
+"$(yarn bin)/parcel" ./client/index.html
