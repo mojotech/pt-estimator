@@ -1,12 +1,18 @@
 import React from 'react';
-import { GoogleLogin } from 'react-google-login';
+import { useDispatch } from 'react-redux';
+import { GoogleLogin, GoogleLoginResponse } from 'react-google-login';
+
+import { setUser } from '~redux/actions/user';
 
 interface Props {
   history: { push: Function };
 }
 
 const OAuth = ({ history }: Props) => {
-  const oAuthSuccess = () => {
+  const dispatch = useDispatch();
+
+  const oAuthSuccess = (response: GoogleLoginResponse) => {
+    dispatch(setUser(response));
     history.push('/success');
   };
 
