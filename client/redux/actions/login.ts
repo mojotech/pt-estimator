@@ -1,8 +1,14 @@
-import { Login, loginActionType, SET_LOGIN } from '../types';
+import { Login, ActionTypes, LoginType } from '../types';
 
-export function setLogin(newLogin: Login): loginActionType {
+export function setLogin(newLogin: Login): ActionTypes {
   return {
-    type: SET_LOGIN,
+    type: LoginType.SET_LOGIN,
     login: newLogin,
+  };
+}
+
+export function addAttempt(): ActionTypes {
+  return {
+    type: LoginType.ADD_ATTEMPT,
   };
 }

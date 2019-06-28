@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { GoogleLogin, GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
 
 import { setUser } from '../redux/actions/user';
-import { setLogin } from '../redux/actions/login';
+import { setLogin, addAttempt } from '../redux/actions/login';
 import { User } from '../redux/types';
 
 function OAuth({ dispatch }) {
@@ -22,11 +22,12 @@ function OAuth({ dispatch }) {
       imageUrl: profile.getImageUrl(),
     };
     dispatch(setUser(user));
-    dispatch(setLogin({ loggedIn: true }));
+    dispatch(setLogin({ loggedIn: true, attempts: 0 }));
     setToHome(true);
   }
 
   function oAuthFailure(response: GoogleLoginResponse | GoogleLoginResponseOffline): void {
+    dispatch(addAttempt());
     setToFailure(true);
   }
 

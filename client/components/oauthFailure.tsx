@@ -1,12 +1,30 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
+import { State } from '../redux/reducers';
+import { User, Login } from '../redux/types';
 import OAuth from '~components/oauth';
 
-const OAuthFailure = () => (
-  <>
-    <h2>Wrong credentials, try again</h2>
-    <OAuth />
-  </>
-);
+interface Props {
+  login: Login;
+  user: User;
+}
 
-export default OAuthFailure;
+function OAuthFailure(props: Props) {
+  return props.login.attempts < 3 ? (
+    <>
+      <>Wrong credentials, try again</>
+      <OAuth />
+    </>
+  ) : (
+    <>Too many wrong attempts. Try later.</>
+  );
+}
+
+const mapStateToProps = function(state: State) {
+  return {
+    login: state.loginReducer,
+  };
+};
+
+export default connect(mapStateToProps)(OAuthFailure);
