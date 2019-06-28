@@ -1,5 +1,10 @@
 import React from 'react';
 import { useQuery } from 'urql';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+
+import OAuth from '~components/oauth';
+import OAuthFailure from '~components/oauthFailure';
+import OAuthSuccess from '~components/oauthSuccess';
 
 const ServerTest = () => {
   const [result] = useQuery({
@@ -24,6 +29,13 @@ const App: React.SFC<Props> = ({ message }) => {
       <p>{message}</p>
       <p>and...</p>
       <ServerTest />
+      <BrowserRouter>
+        <Switch>
+          <Route path="/failure" component={OAuthFailure} />
+          <Route path="/success" component={OAuthSuccess} />
+          <Route path="/" component={OAuth} />
+        </Switch>
+      </BrowserRouter>
     </>
   );
 };
