@@ -20,11 +20,11 @@ interface Props {
 
 const App: React.SFC<Props> = ({ message }) => {
   return (
-    <div>
+    <>
       <p>{message}</p>
       <p>and...</p>
       <ServerTest />
-    </div>
+    </>
   );
 };
 
