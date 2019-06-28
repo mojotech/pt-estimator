@@ -31,6 +31,13 @@ This includes:
 * vscode
 * sublime
 
+## Client Init
+
+Ensure you have [nvm](https://github.com/nvm-sh/nvm) installed (this will ensure the project uses a consistent version of Node).
+
+1. nvm use
+2. yarn install
+
 ## Client Scripts
 
 ### Formatting
