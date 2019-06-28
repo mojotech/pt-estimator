@@ -31,6 +31,10 @@ This includes:
 * vscode
 * sublime
 
+## Client Init
+
+1. yarn install
+
 ## Client Scripts
 
 ### Formatting
