@@ -30,3 +30,9 @@ This includes:
 * vim
 * vscode
 * sublime
+
+## Client Scripts
+
+### Formatting
+Run `yarn format` to have `prettier` format all `TypeScript` files in `client/`.
+Run `yarn format:check` to verify `prettier` has run, or to see if any files need formatting.
