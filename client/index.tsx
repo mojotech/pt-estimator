@@ -10,10 +10,7 @@ import App from '~/app';
 
 ReactDOM.render(
   <Provider value={client}>
-    <div>
-      <span>Hello</span>
-      <App message={'from parcel!'} />
-    </div>
+    <App />
   </Provider>,
   document.getElementById('root')
 );
