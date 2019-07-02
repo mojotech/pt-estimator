@@ -44,6 +44,7 @@ end
 
 group :test do
   gem 'rspec-rails', '~>3.8.2'
+  gem 'rspec_junit_formatter'
 end
 
 
