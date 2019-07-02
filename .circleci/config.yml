@@ -5,13 +5,12 @@ executors:
       - image: circleci/ruby:2.6.3
         environment:
             PGHOST: localhost
-            PGUSER: pt-estimator
+            PGUSER: pt_estimator
             RAILS_ENV: test
       - image: postgres:10.9
         environment:
-            POSTGRES_USER: pt-estimator
-            POSTGRES_DB: pt-estimator_test
-            POSTGRES_PASSWORD: ""
+            POSTGRES_USER: pt_estimator
+            POSTGRES_DB: pt_estimator_test
     working_directory: ~/repo/server
   client:
     docker:
