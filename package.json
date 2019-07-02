@@ -9,16 +9,25 @@
   "devDependencies": {
     "@types/react": "^16.8.20",
     "@types/react-dom": "^16.8.4",
+    "concurrently": "^4.1.0",
     "cross-env": "^5.2.0",
+    "express": "^4.17.1",
+    "http-proxy-middleware": "^0.19.1",
     "parcel-bundler": "^1.12.3",
     "typescript": "^3.5.2"
   },
   "scripts": {
-    "start": "./start.sh",
-    "build": "cross-env NODE_ENV=production parcel build client/index.html --public-url ."
+    "develop": "concurrently \"yarn:type-check:watch\" \"yarn:start\" \"yarn:server\"",
+    "server": "./server.sh",
+    "start": "node client.js",
+    "build": "cross-env NODE_ENV=production parcel build client/index.html --public-url .",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "tsc --noEmit --watch --preserveWatchOutput"
   },
   "dependencies": {
+    "graphql": "^14.3.1",
     "react": "^16.0.0",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "urql": "^1.1.3"
   }
 }
