@@ -1,5 +1,5 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React from 'react';
+import ReactDOM from 'react-dom';
 import { Provider, createClient } from 'urql';
 
 const client = createClient({
@@ -10,7 +10,10 @@ import App from '~/app';
 
 ReactDOM.render(
   <Provider value={client}>
-    <div><span>Hello</span><App message={'from parcel!'} /></div>
+    <div>
+      <span>Hello</span>
+      <App message={'from parcel!'} />
+    </div>
   </Provider>,
-  document.getElementById('root'),
-)
+  document.getElementById('root')
+);

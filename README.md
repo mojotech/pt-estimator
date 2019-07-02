@@ -30,3 +30,16 @@ This includes:
 * vim
 * vscode
 * sublime
+
+## Client Init
+
+Ensure you have [nvm](https://github.com/nvm-sh/nvm) installed (this will ensure the project uses a consistent version of Node).
+
+1. nvm use
+2. yarn install
+
+## Client Scripts
+
+### Formatting
+Run `yarn format` to have `prettier` format all `TypeScript` files in `client/`.
+Run `yarn format:check` to verify `prettier` has run, or to see if any files need formatting.

@@ -14,6 +14,8 @@
     "express": "^4.17.1",
     "http-proxy-middleware": "^0.19.1",
     "parcel-bundler": "^1.12.3",
+    "prettier": "^1.18.2",
+    "prettier-check": "^2.0.0",
     "typescript": "^3.5.2"
   },
   "scripts": {
@@ -22,7 +24,9 @@
     "start": "node client.js",
     "build": "cross-env NODE_ENV=production parcel build client/index.html --public-url .",
     "type-check": "tsc --noEmit",
-    "type-check:watch": "tsc --noEmit --watch --preserveWatchOutput"
+    "type-check:watch": "tsc --noEmit --watch --preserveWatchOutput",
+    "format": "prettier --config ./.prettierrc --write \"client/**/*.{ts,tsx}\"",
+    "format:check": "yarn prettier-check --config ./.prettierrc \"client/**/*.{ts,tsx}\""
   },
   "dependencies": {
     "graphql": "^14.3.1",

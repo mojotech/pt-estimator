@@ -11,19 +11,21 @@ const ServerTest = () => {
     return <p>...loading</p>;
   }
 
-  return <p>{data.testField}</p>
-}
+  return <p>{data.testField}</p>;
+};
 
 interface Props {
   message: string;
 }
 
 const App: React.SFC<Props> = ({ message }) => {
-  return <div>
-    <p>{message}</p>
-    <p>and...</p>
-    <ServerTest />
-  </div>;
+  return (
+    <div>
+      <p>{message}</p>
+      <p>and...</p>
+      <ServerTest />
+    </div>
+  );
 };
 
 export default App;
