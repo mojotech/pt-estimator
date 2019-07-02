@@ -1,0 +1,95 @@
+version: 2.1
+executors:
+  server:
+    docker:
+      - image: circleci/ruby:2.6.3
+        environment:
+            PGHOST: localhost
+            PGUSER: pt-estimator
+            RAILS_ENV: test
+      - image: postgres:10.9
+        environment:
+            POSTGRES_USER: pt-estimator
+            POSTGRES_DB: pt-estimator_test
+            POSTGRES_PASSWORD: ""
+    working_directory: ~/repo/server
+  client:
+    docker:
+      - image: circleci/node:12.5.0
+    working_directory: ~/repo/
+jobs:
+  build_server:
+    executor: server
+    steps:
+      - checkout:
+          path: ~/repo
+
+      - restore_cache:
+          keys:
+          - gem-cache-{{ checksum "Gemfile.lock" }}
+          # fallback to using the latest cache if no exact match is found
+          - gem-cache-
+
+      - run: gem install bundler:2.0.2
+
+      - run:
+          name: install gem dependencies
+          command: |
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: gem-cache-{{ checksum "Gemfile.lock" }}
+
+      # Database setup
+      - run: bundle exec rake db:create
+      - run: bundle exec rake db:schema:load
+
+      - run:
+          name: run tests
+          command: |
+            mkdir /tmp/test-results
+            TEST_FILES="$(circleci tests glob 'spec/**/*_spec.rb' | circleci tests split --split-by=timings)"
+            
+            bundle exec rspec --format progress \
+                            --format RspecJunitFormatter \
+                            --out /tmp/test-results/rspec.xml \
+                            --format progress \
+                            $TEST_FILES
+
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results
+  build_client:
+    executor: client
+    steps:
+      - checkout:
+          path: ~/repo
+
+      - restore_cache:
+          keys:
+          - yarn-cache-{{ checksum "yarn.lock" }}
+          # fallback to using the latest cache if no exact match is found
+          - yarn-cache-
+
+      - run:
+          name: install yarn dependencies
+          command: |
+            yarn install
+
+      - save_cache:
+          paths:
+            - ~/.yarn-cache
+          key: yarn-cache-{{ checksum "yarn.lock" }}
+
+      - run: yarn run format:check
+
+workflows:
+  version: 2.1
+  build:
+    jobs:
+      - build_server
+      - build_client
