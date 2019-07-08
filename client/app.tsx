@@ -5,6 +5,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import OAuth from '~components/oauth';
 import OAuthFailure from '~components/oauthFailure';
 import OAuthSuccess from '~components/oauthSuccess';
+import Test from '~components/test';
 
 const ServerTest = () => {
   const [result] = useQuery({
@@ -36,6 +37,7 @@ const App: React.SFC<Props> = ({ message }) => {
           <Route path="/" component={OAuth} />
         </Switch>
       </BrowserRouter>
+      <Test />
     </>
   );
 };
