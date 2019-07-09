@@ -6,32 +6,16 @@ module Types
       "from rails graphql!"
     end
 
-    field :users, [UserType], null: false do
-      description "PT Estimator Users"
+    field :fetch_user, UserType, null: false do
+      description "Fetch or store a user"
+      argument :data, UserInputType, required: true
     end
 
-    def users
-      User.all
+    def fetch_user(data:)
+      user = User.find_by(:email=>data.to_h[:email])
+      return User.create!(data.to_h) if user.nil?
+      user.update(data.to_h)
+      user
     end
-
-    field :new_user, UserType, null: false do
-      description "New PT Estimator User"
-      argument :email, String, required: true
-      argument :name, String, required: true
-      argument :first_name, String, required: true
-      argument :last_name, String, required: true
-      argument :img_url, String, required: true
-    end
-
-    def new_user(email:, name:, first_name:, last_name:, img_url:)
-      User.create(
-        :email => email,
-        :name => name,
-        :first_name => first_name,
-        :last_name => last_name,
-        :img_url => img_url
-      )
-    end
-
   end
 end

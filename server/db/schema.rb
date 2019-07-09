@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2019_07_01_175654) do
     t.string "first_name", null: false
     t.string "last_name", null: false
     t.string "img_url", null: false
+    t.string "api_token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

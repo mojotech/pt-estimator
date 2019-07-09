@@ -8,5 +8,6 @@ module Types
     field "first_name", String, null: false
     field "last_name", String, null: false
     field "img_url", String, null: false
+    field "api_token", String, null: true
   end
 end
