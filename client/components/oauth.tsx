@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { GoogleLogin, GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
 
@@ -7,19 +7,23 @@ import { setUser } from '../redux/actions/user';
 import { setLogin, addAttempt } from '../redux/actions/login';
 import { User } from '../redux/types';
 
-function OAuth({ dispatch }) {
+function OAuth() {
   const [toHome, setToHome] = useState(false);
   const [toFailure, setToFailure] = useState(false);
 
+  const dispatch = useDispatch();
+
   function oAuthSuccess(response: GoogleLoginResponse): void {
     const profile = response.getBasicProfile();
+
     const user: User = {
       id: profile.getId(),
       email: profile.getEmail(),
       name: profile.getName(),
       firstName: profile.getGivenName(),
       lastName: profile.getFamilyName(),
-      imageUrl: profile.getImageUrl(),
+      imgUrl: profile.getImageUrl(),
+      apiToken: '',
     };
     dispatch(setUser(user));
     dispatch(setLogin({ loggedIn: true, attempts: 0 }));
@@ -47,4 +51,4 @@ function OAuth({ dispatch }) {
   );
 }
 
-export default connect()(OAuth);
+export default OAuth;
