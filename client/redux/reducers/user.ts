@@ -1,4 +1,4 @@
-import { User, SET_USER, setUserActionType } from '../types';
+import { User, ActionTypes } from '../types';
 
 const initialState: User = {
   id: '',
@@ -6,19 +6,21 @@ const initialState: User = {
   name: '',
   firstName: '',
   lastName: '',
-  imageUrl: '',
+  imgUrl: '',
+  apiToken: '',
 };
 
-export function userReducer(state = initialState, action: setUserActionType): User {
+export function userReducer(state = initialState, action: ActionTypes): User {
   switch (action.type) {
     case 'SET_USER':
       return {
-        id: action.profile.id,
-        email: action.profile.email,
-        name: action.profile.name,
-        firstName: action.profile.firstName,
-        lastName: action.profile.lastName,
-        imageUrl: action.profile.imageUrl,
+        ...action.profile,
+        apiToken: initialState.apiToken,
+      };
+    case 'SET_TOKEN':
+      return {
+        ...state,
+        apiToken: action.profile.apiToken,
       };
     default:
       return state;

@@ -4,7 +4,8 @@ export interface User {
   name: string;
   firstName: string;
   lastName: string;
-  imageUrl: string;
+  imgUrl: string;
+  apiToken: string;
 }
 
 export interface Login {
@@ -12,7 +13,10 @@ export interface Login {
   attempts: number;
 }
 
-export const SET_USER = 'SET_USER';
+export enum UserType {
+  SET_USER = 'SET_USER',
+  SET_TOKEN = 'SET_TOKEN',
+}
 
 export enum LoginType {
   SET_LOGIN = 'SET_LOGIN',
@@ -20,7 +24,12 @@ export enum LoginType {
 }
 
 export interface setUserActionType {
-  type: typeof SET_USER;
+  type: typeof UserType.SET_USER;
+  profile: User;
+}
+
+export interface setTokenActionType {
+  type: typeof UserType.SET_TOKEN;
   profile: User;
 }
 
@@ -33,4 +42,8 @@ export interface addAttemptActionType {
   type: typeof LoginType.ADD_ATTEMPT;
 }
 
-export type ActionTypes = addAttemptActionType | loginActionType;
+export type ActionTypes =
+  | addAttemptActionType
+  | loginActionType
+  | setTokenActionType
+  | setUserActionType;

@@ -1,8 +1,18 @@
-import { User, SET_USER, setUserActionType } from '../types';
+import { User, ActionTypes, UserType } from '../types';
+import store from '../reducers/index';
 
-export function setUser(newUser: User): setUserActionType {
+export function setUser(newUser: User): ActionTypes {
   return {
-    type: SET_USER,
+    type: UserType.SET_USER,
     profile: newUser,
+  };
+}
+
+export function setToken(updatedToken: string): ActionTypes {
+  let updatedUser = store.getState().userReducer;
+  updatedUser.apiToken = updatedToken;
+  return {
+    type: UserType.SET_TOKEN,
+    profile: updatedUser,
   };
 }
