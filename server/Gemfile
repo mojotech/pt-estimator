@@ -33,6 +33,7 @@ gem 'graphql', '~> 1.9.7'
 group :development, :test do
   gem 'pry', '~> 0.12.2'
   gem 'pry-rails', '~> 0.3.9'
+  gem 'pry-remote'
 end
 
 group :development do
