@@ -2,7 +2,7 @@ import React from 'react';
 import { useStore } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import TokenPrompt from '~components/tokenPrompt';
+import TokenPrompt from '~components/oauth/tokenPrompt';
 
 const OAuthSuccess = () => {
   const store = useStore();

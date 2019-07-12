@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import OAuth from '~components/oauth';
-import OAuthFailure from '~components/oauthFailure';
-import OAuthSuccess from '~components/oauthSuccess';
+import OAuth from '~components/oauth/oauth';
+import OAuthFailure from '~components/oauth/oauthFailure';
+import OAuthSuccess from '~components/oauth/oauthSuccess';
 
 const App: React.SFC = () => {
   return (

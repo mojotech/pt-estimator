@@ -1,6 +1,6 @@
 import React from 'react';
 
-import OAuth from '~components/oauth';
+import OAuth from '~components/oauth/oauth';
 
 interface Props {
   history: { push: Function };
