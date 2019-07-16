@@ -28,14 +28,29 @@ module Types
     end
 
     def validity(email:, token:)
-      if User.valid_token?(email: email, token: token)
-        user = User.find_by(email: email)
+      user = User.find_by(email: email)
+      if user.valid_token?(email: email, token: token)
         user.update(api_token: token)
         return true
       end
       false
     rescue StandardError
       false
+    end
+
+    field :projects, ProjectResponse, null: false do
+      description 'List of projects for that user'
+      argument :token, String, required: true
+      argument :filter, String, required: true
+    end
+
+    def projects(token:, filter:)
+      user = User.find_by(api_token: token)
+      return [] if filter.empty? || user.nil?
+
+      user.find_projects_stories(token: token, filter: filter)
+    rescue TrackerApi::Errors::ClientError, TrackerApi::Errors::ServerError => e
+      e.response.with_indifferent_access[:body]
     end
   end
 end
