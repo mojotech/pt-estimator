@@ -1,30 +1,19 @@
 import React from 'react';
-import { useQuery } from 'urql';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-const ServerTest = () => {
-  const [result] = useQuery({
-    query: `{ testField }`,
-  });
-  const { fetching, data } = result;
+import OAuth from '~components/oauth/oauth';
+import OAuthFailure from '~components/oauth/oauthFailure';
+import OAuthSuccess from '~components/oauth/oauthSuccess';
 
-  if (fetching) {
-    return <p>...loading</p>;
-  }
-
-  return <p>{data.testField}</p>;
-};
-
-interface Props {
-  message: string;
-}
-
-const App: React.SFC<Props> = ({ message }) => {
+const App: React.SFC = () => {
   return (
-    <div>
-      <p>{message}</p>
-      <p>and...</p>
-      <ServerTest />
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/failure" component={OAuthFailure} />
+        <Route path="/success" component={OAuthSuccess} />
+        <Route exact path="/" component={OAuth} />
+      </Switch>
+    </BrowserRouter>
   );
 };
 

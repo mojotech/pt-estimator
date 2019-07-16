@@ -29,9 +29,16 @@
     "format:check": "yarn prettier-check --config ./.prettierrc \"client/**/*.{ts,tsx}\""
   },
   "dependencies": {
+    "@types/node": "^12.0.10",
+    "@types/react-redux": "^7.1.1",
+    "@types/react-router-dom": "^4.3.4",
     "graphql": "^14.3.1",
     "react": "^16.0.0",
     "react-dom": "^16.8.6",
+    "react-google-login": "^5.0.4",
+    "react-redux": "^7.1.0",
+    "react-router-dom": "^5.0.1",
+    "redux": "^4.0.1",
     "urql": "^1.1.3"
   }
 }
