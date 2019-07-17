@@ -28,7 +28,7 @@ const TokenPrompt = () => {
   });
 
   if (res.data && res.data.validity) {
-    return <Homepage />;
+    return <Homepage token={token} />;
   }
 
   return (

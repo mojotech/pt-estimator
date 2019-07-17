@@ -38,7 +38,7 @@ const OAuthSuccess = ({ history }: Props) => {
 
   if (state.email) {
     if (res.data.fetchUser.apiToken) {
-      return <Homepage />;
+      return <Homepage token={res.data.fetchUser.apiToken} />;
     } else {
       return <TokenPrompt />;
     }
