@@ -109,6 +109,7 @@ const PivotalConnect = () => {
           </TokenApperanaceText>
           <ProfileUnderLine />
         </TextButton>
+        <PivotalInputField />
         <TextButton onClick={() => toggleExplanationVisibility(!showExplanation)}>
           <TokenApperanaceText>
             <HelpButton />

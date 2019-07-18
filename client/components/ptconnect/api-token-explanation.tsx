@@ -24,6 +24,7 @@ const LargeGrayRectangle = styled.div`
   width: 400px;
   height: 46px;
   opacity: 0.5;
+  border-radius: 5px 5px 0px 0px;
   background-color: #32353c;
   align-self: center;
   display: flex;
