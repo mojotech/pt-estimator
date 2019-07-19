@@ -4,7 +4,20 @@ import styled from 'styled-components';
 import profileIcon from '~assets/images/profileIcon.png';
 import ProjectsDropdown from '~components/projects/projects-dropdown';
 import * as Types from '~components/projects/types';
+import StoryReviewList from '~components/review/story-review-list';
+import StoryReview from '~components/review/story-review-type';
 import { colors, fontSizes, spacing } from '~lib/theme';
+
+const stories: StoryReview[] = [
+  {
+    storyName: 'Properties with existing Tenants attached them can’t be deleted',
+    estimateValue: 3,
+    storyID: 0,
+  },
+  { storyName: 'Welcome email (HTML)', estimateValue: 2, storyID: 1 },
+  { storyName: 'Make first and last name separate fields', estimateValue: null, storyID: 2 },
+  { storyName: 'Admin: edit resident away dates', estimateValue: null, storyID: 3 },
+];
 
 const Header = styled.div`
   display: flex;
@@ -48,6 +61,7 @@ const NavBar = ({ projects }: Props) => {
       <NavButton>
         <img src={profileIcon} />
       </NavButton>
+      <StoryReviewList stories={stories} />
     </Header>
   );
 };
