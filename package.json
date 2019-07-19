@@ -37,6 +37,7 @@
     "storybook": "start-storybook -p 6006"
   },
   "dependencies": {
+    "@svgr/parcel-plugin-svgr": "^4.3.2",
     "@types/node": "^12.0.10",
     "@types/react-redux": "^7.1.1",
     "@types/react-router-dom": "^4.3.4",
