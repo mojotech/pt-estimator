@@ -13,6 +13,7 @@ export interface Story {
   tasks: Task[];
   labels: Label[];
   estimate: number;
+  userEstimates: Estimate[];
 }
 
 export interface Comment {
@@ -31,4 +32,10 @@ export interface Task {
 export interface Label {
   id: string;
   name: string;
+}
+
+export interface Estimate {
+  id: string;
+  pointValue: number;
+  userId: string;
 }

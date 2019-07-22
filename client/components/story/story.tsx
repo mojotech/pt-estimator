@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import EstimateSelect from '~components/point-estimate/estimate-select';
 import { Story as StoryType } from '~components/projects/types';
+import * as Types from '~components/projects/types';
 import Description from '~components/story/story-description';
 import Details from '~components/story/story-details';
 import Tasks from '~components/story/story-tasks';
@@ -29,7 +31,7 @@ interface StoryProps {
 }
 
 const Story = ({
-  data: { id, name, description, storyType, comments, tasks, labels },
+  data: { id, name, description, storyType, comments, tasks, labels, userEstimates },
 }: StoryProps) => {
   return (
     <>
@@ -39,6 +41,16 @@ const Story = ({
         <Tasks tasks={tasks} />
         <CommentTitle>{`Comments (${comments.length})`}</CommentTitle>
         <CommentDivider />
+        {userEstimates.map((est: Types.Estimate) => {
+          return (
+            <div key={est.id}>
+              <h4>User estimates</h4>
+              <p>user: {est.userId}</p>
+              <p>estimate: {est.pointValue}</p>
+            </div>
+          );
+        })}
+        <EstimateSelect storyId={id} />
       </StoryWrapper>
     </>
   );

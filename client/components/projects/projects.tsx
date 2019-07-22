@@ -9,7 +9,7 @@ import Project from '~components/projects/project';
 
 const fetchProjects = `query FetchProjects($filter: String!) {
   projects(filter: $filter) {
-    ... on Error {
+    ... on PtError {
       code
       error
       kind
@@ -40,6 +40,12 @@ const fetchProjects = `query FetchProjects($filter: String!) {
             name
           }
           estimate
+          userEstimates {
+            id
+            pointValue
+            storyId
+            userId
+          }
         }
       }
     }
