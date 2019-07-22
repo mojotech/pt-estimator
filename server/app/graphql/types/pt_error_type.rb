@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Types
-  class ErrorType < Types::BaseObject
-    graphql_name 'Error'
+  class PtErrorType < Types::BaseObject
+    graphql_name 'PtError'
 
     field 'code', String, null: false
     field 'kind', String, null: false
