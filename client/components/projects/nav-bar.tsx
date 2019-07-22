@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import profileIcon from '~assets/images/profileIcon.png';
@@ -23,7 +23,8 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   background-color: ${colors.charcoal};
-  padding: 12px ${spacing.l};
+  padding-left: ${spacing.l};
+  padding-right: ${spacing.l};
 `;
 
 const NavButton = styled.button`
@@ -35,8 +36,21 @@ const NavButton = styled.button`
   justify-content: center;
 `;
 
-const Notifications = styled(NavButton)`
+const Projects = styled(NavButton)`
+  > img {
+    padding: 10px 7px;
+  }
+`;
+
+interface NotificationProps {
+  showStoryList: boolean;
+}
+
+const Notifications = styled(NavButton)<NotificationProps>`
   flex-direction: column;
+  width: 124px;
+  height: 57px;
+  background-color: ${props => (props.showStoryList ? colors.warmGrey : colors.charcoal)};
 `;
 
 const UnderLine = styled.div`
@@ -51,18 +65,25 @@ interface Props {
 }
 
 const NavBar = ({ projects }: Props) => {
+  const [showStoryList, toggleStoryList] = useState(false);
+
   return (
-    <Header>
-      <ProjectsDropdown projects={projects} />
-      <Notifications>
-        1 of 7
-        <UnderLine />
-      </Notifications>
-      <NavButton>
-        <img src={profileIcon} />
-      </NavButton>
-      <StoryReviewList stories={stories} />
-    </Header>
+    <>
+      <Header>
+        <ProjectsDropdown projects={projects} />
+        <Notifications
+          onClick={() => toggleStoryList(!showStoryList)}
+          showStoryList={showStoryList}
+        >
+          1 of {stories.length}
+          <UnderLine />
+        </Notifications>
+        <NavButton>
+          <img src={profileIcon} />
+        </NavButton>
+      </Header>
+      {showStoryList && <StoryReviewList stories={stories} />}
+    </>
   );
 };
 
