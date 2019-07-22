@@ -58,5 +58,14 @@ module Types
     rescue TrackerApi::Errors::ClientError, TrackerApi::Errors::ServerError => e
       e.response.with_indifferent_access[:body]
     end
+
+    field :story_estimates, [EstimateType], null: true do
+      description 'Array of estimates for a story'
+      argument :story_id, String, required: true
+    end
+
+    def story_estimates(story_id:)
+      Story.get_story_estimates(story_id: story_id)
+    end
   end
 end
