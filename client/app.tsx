@@ -5,19 +5,23 @@ import Story from '~components/story/story';
 import OAuth from '~components/oauth/oauth';
 import OAuthFailure from '~components/oauth/oauthFailure';
 import OAuthSuccess from '~components/oauth/oauthSuccess';
+import NavBar from '~nav-bar';
 import PivotalConnect from '~components/ptconnect/pivotal-connect';
 
 const App: React.SFC = () => {
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/failure" component={OAuthFailure} />
-        <Route path="/success" component={OAuthSuccess} />
-        <Route exact path="/" component={OAuth} />
-      </Switch>
-      <Story />
-      <PivotalConnect />
-    </BrowserRouter>
+    <>
+      <NavBar />
+      <BrowserRouter>
+        <Switch>
+          <Route path="/failure" component={OAuthFailure} />
+          <Route path="/success" component={OAuthSuccess} />
+          <Route exact path="/" component={OAuth} />
+        </Switch>
+        <Story />
+        <PivotalConnect />
+      </BrowserRouter>
+    </>
   );
 };
 
