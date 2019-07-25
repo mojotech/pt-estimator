@@ -16,15 +16,15 @@ module Types
       !User.find_by(email: context[:current_user][:email])[:api_token].nil?
     end
 
-    field :validity, Boolean, null: false do
+    field :is_api_token_valid, Boolean, null: false do
       description 'Check validity of user token and email'
-      argument :email, String, required: true
       argument :token, String, required: true
     end
 
-    def validity(email:, token:)
-      user = User.find_by(email: email)
-      if user.valid_token?(email: email, token: token)
+    def is_api_token_valid(token:)
+      email = context[:current_user][:email]
+      if User.valid_token?(email: email, token: token)
+        user = User.find_by(email: email)
         user.update(api_token: token)
         return true
       end

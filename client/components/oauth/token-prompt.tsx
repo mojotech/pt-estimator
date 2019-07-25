@@ -4,8 +4,8 @@ import { useQuery } from 'urql';
 
 import Homepage from '~components/Homepage';
 
-const validateToken = `query validateToken($email: String!, $token: String!){
-  validity(email: $email, token: $token)
+const validateToken = `query validateToken($token: String!){
+  isApiTokenValid(token: $token)
 }`;
 
 const TokenPrompt = () => {
@@ -22,12 +22,11 @@ const TokenPrompt = () => {
   const [res] = useQuery({
     query: validateToken,
     variables: {
-      email: state.email,
       token: token,
     },
   });
 
-  if (res.data && res.data.validity) {
+  if (res.data && res.data.isApiTokenValid) {
     return <Homepage token={token} />;
   }
 
