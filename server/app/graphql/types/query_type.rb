@@ -8,17 +8,12 @@ module Types
       'from rails graphql!'
     end
 
-    field :fetch_user, UserType, null: false do
-      description 'Fetch or store a user'
-      argument :data, UserInputType, required: true
+    field :has_api_token, Boolean, null: false do
+      description 'Determine if the current user has an API token'
     end
 
-    def fetch_user(data:)
-      user = User.find_by(email: data.to_h[:email])
-      return User.create!(data.to_h) if user.nil?
-
-      user.update(data.to_h)
-      user
+    def has_api_token
+      !User.find_by(email: context[:current_user][:email])[:api_token].nil?
     end
 
     field :validity, Boolean, null: false do

@@ -6,15 +6,8 @@ import OAuth from '~/components/oauth/oauth';
 import TokenPrompt from '~components/oauth/token-prompt';
 import Homepage from '~components/Homepage';
 
-const fetchUser = `query FetchUser($data: UserInput!){
-  fetchUser(data: $data){
-    apiToken
-    email
-    firstName
-    imgUrl
-    lastName
-    name
-  }
+const hasApiToken = `query HasApiToken {
+  hasApiToken
 }`;
 
 interface Props {
@@ -26,8 +19,7 @@ const OAuthSuccess = ({ history }: Props) => {
   const state = store.getState();
 
   const [res] = useQuery({
-    query: fetchUser,
-    variables: { data: state },
+    query: hasApiToken,
   });
 
   if (res.fetching) {
@@ -37,14 +29,13 @@ const OAuthSuccess = ({ history }: Props) => {
   }
 
   if (state.email) {
-    if (res.data.fetchUser.apiToken) {
-      return <Homepage token={res.data.fetchUser.apiToken} />;
+    if (res.data.hasApiToken === true) {
+      return <Homepage />;
     } else {
       return <TokenPrompt />;
     }
-  } else {
-    return <OAuth history={history} />;
   }
+  return <OAuth history={history} />;
 };
 
 export default OAuthSuccess;
