@@ -6,7 +6,7 @@ import ProjectsDropdown from '~components/projects/projects-dropdown';
 import * as Types from '~components/projects/types';
 import StoryReviewList from '~components/review/story-review-list';
 import StoryReview from '~components/review/story-review-type';
-import { colors, fontSizes, spacing } from '~lib/theme';
+import { colors, fonts, fontSizes, spacing } from '~lib/theme';
 
 const stories: StoryReview[] = [
   {
@@ -31,7 +31,7 @@ const NavButton = styled.button`
   display: flex;
   color: ${colors.white};
   font-size: ${fontSizes.medium};
-  font-family: GT America;
+  font-family: ${fonts.america};
   align-items: center;
   justify-content: center;
 `;

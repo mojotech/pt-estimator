@@ -96,7 +96,7 @@ const EstimateBox = styled.div`
 `;
 
 const EstimateBoxNumber = styled.div`
-  font-family: GT America;
+  font-family: ${fonts.america};
   font-size: ${fontSizes.medium};
   line-height: 1.5;
   color: ${colors.charcoal};
