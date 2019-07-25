@@ -17,9 +17,9 @@ const App: React.SFC = () => {
           <Route path="/failure" component={OAuthFailure} />
           <Route path="/success" component={OAuthSuccess} />
           <Route exact path="/" component={OAuth} />
+          <Route exact path="/test-story" component={Story} />
+          <Route exact path="/test-pivotal-connect" component={PivotalConnect} />
         </Switch>
-        <Story />
-        <PivotalConnect />
       </BrowserRouter>
     </>
   );
