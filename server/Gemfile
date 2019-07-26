@@ -32,6 +32,7 @@ gem 'graphql', '~> 1.9.7'
 gem 'tracker_api'
 
 gem 'dotenv-rails', '~> 2.4.0'
+gem 'google-id-token'
 
 group :development, :test do
   gem 'pry', '~> 0.12.2'
