@@ -31,6 +31,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'graphql', '~> 1.9.7'
 gem 'tracker_api'
 
+gem 'dotenv-rails', '~> 2.4.0'
+
 group :development, :test do
   gem 'pry', '~> 0.12.2'
   gem 'pry-rails', '~> 0.3.9'
