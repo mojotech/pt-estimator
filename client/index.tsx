@@ -1,29 +1,26 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import ReactDOM from 'react-dom';
-import { Provider as UrqlProvider, createClient } from 'urql';
-import { Provider as ReduxProvider } from 'react-redux';
-import { CookiesProvider } from 'react-cookie';
-
-const client = createClient({
-  url: '/graphql',
-  fetchOptions: { credentials: 'include' },
-});
-
+import { Provider as UrqlProvider, Client } from 'urql';
+import { Provider as ReduxProvider, useSelector } from 'react-redux';
 import App from '~/app';
-import store from './redux/reducers';
+import store, { ReduxState } from './redux/reducers';
 
-const render = () => {
-  ReactDOM.render(
-    <CookiesProvider>
-      <ReduxProvider store={store}>
-        <UrqlProvider value={client}>
-          <App />
-        </UrqlProvider>
-      </ReduxProvider>
-    </CookiesProvider>,
-    document.getElementById('root')
+const createClient = () =>
+  new Client({ url: '/graphql', fetchOptions: { credentials: 'include' } });
+
+const AppClient: React.SFC = () => {
+  const email = useSelector((state: ReduxState) => state.email);
+  const client = useMemo(createClient, [email]);
+  return (
+    <UrqlProvider value={client}>
+      <App />
+    </UrqlProvider>
   );
 };
 
-store.subscribe(render);
-render();
+const Main: React.SFC = () => (
+  <ReduxProvider store={store}>
+    <AppClient />
+  </ReduxProvider>
+);
+ReactDOM.render(<Main />, document.getElementById('root'));
