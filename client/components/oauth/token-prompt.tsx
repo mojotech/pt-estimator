@@ -1,9 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { useStore } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import { useQuery } from 'urql';
-
-import Homepage from '~components/Homepage';
 
 import { colors, fonts, fontSizes } from '~lib/theme';
 
@@ -56,7 +55,7 @@ const TokenPrompt = () => {
   });
 
   if (res.data && res.data.isApiTokenValid) {
-    return <Homepage />;
+    return <Redirect to="/home" />;
   }
 
   return (

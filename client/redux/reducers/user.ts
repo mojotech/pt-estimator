@@ -6,6 +6,7 @@ interface User {
   firstName: string;
   lastName: string;
   imgUrl: string;
+  loggedIn: boolean;
 }
 
 interface UserAction {
@@ -19,6 +20,7 @@ const initialState: User = {
   firstName: '',
   lastName: '',
   imgUrl: '',
+  loggedIn: false,
 };
 
 export const user = (state: User = initialState, action: UserAction): User => {
@@ -32,6 +34,7 @@ export const user = (state: User = initialState, action: UserAction): User => {
         firstName: profile.getGivenName(),
         lastName: profile.getFamilyName(),
         imgUrl: profile.getImageUrl(),
+        loggedIn: true,
       };
     default:
       return state;

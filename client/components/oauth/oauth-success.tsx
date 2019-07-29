@@ -1,10 +1,9 @@
 import { History } from 'history';
 import React from 'react';
 import { useStore } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { useQuery } from 'urql';
 
-import OAuth from '~/components/oauth/oauth';
-import Homepage from '~components/Homepage';
 import PivotalConnect from '~components/ptconnect/pivotal-connect';
 
 const hasApiToken = `query HasApiToken {
@@ -31,12 +30,12 @@ const OAuthSuccess = ({ history }: Props) => {
 
   if (state.user.email) {
     if (res.data.hasApiToken === true) {
-      return <Homepage />;
+      return <Redirect to="/home" />;
     } else {
       return <PivotalConnect />;
     }
   }
-  return <OAuth history={history} />;
+  return <>{history.push('/')}</>;
 };
 
 export default OAuthSuccess;
