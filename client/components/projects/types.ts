@@ -18,7 +18,7 @@ export interface Story {
 export interface Comment {
   id: string;
   text: string;
-  personId: number;
+  personName: string;
   createdAt: Date;
 }
 

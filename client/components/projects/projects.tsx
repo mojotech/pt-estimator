@@ -26,7 +26,7 @@ const fetchProjects = `query FetchProjects($filter: String!) {
           comments {
             id
             createdAt
-            personId
+            personName
             text
           }
           tasks {
