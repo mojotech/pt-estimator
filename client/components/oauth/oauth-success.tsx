@@ -5,7 +5,7 @@ import { useQuery } from 'urql';
 
 import OAuth from '~/components/oauth/oauth';
 import Homepage from '~components/Homepage';
-import TokenPrompt from '~components/oauth/token-prompt';
+import PivotalConnect from '~components/ptconnect/pivotal-connect';
 
 const hasApiToken = `query HasApiToken {
   hasApiToken
@@ -33,7 +33,7 @@ const OAuthSuccess = ({ history }: Props) => {
     if (res.data.hasApiToken === true) {
       return <Homepage />;
     } else {
-      return <TokenPrompt />;
+      return <PivotalConnect />;
     }
   }
   return <OAuth history={history} />;
