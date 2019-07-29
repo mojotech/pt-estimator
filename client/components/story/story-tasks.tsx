@@ -3,10 +3,15 @@ import styled from 'styled-components';
 import { colors, fontSizes, spacing } from '~lib/theme';
 import { Task as TaskType } from '~components/projects/types';
 
-const TaskTitle = styled.div`
+interface TitleProps {
+  noTasks?: boolean;
+}
+
+const TaskTitle = styled.div<TitleProps>`
   font-size: ${fontSizes.large};
   color: ${colors.warmGrey};
   margin-bottom: 20px;
+  opacity: ${props => (props.noTasks ? '0.5' : '1')};
 `;
 
 interface TaskDescripProps {
@@ -41,12 +46,18 @@ interface TasksProps {
 const Tasks = ({ tasks }: TasksProps) => {
   return (
     <TaskWrapper>
-      <TaskTitle>Tasks</TaskTitle>
-      <ul>
-        {tasks.map(task => (
-          <TaskDescrip completed={task.complete}>{task.description}</TaskDescrip>
-        ))}
-      </ul>
+      {tasks.length !== 0 ? (
+        <>
+          <TaskTitle>Tasks</TaskTitle>
+          <TaskList>
+            {tasks.map(task => (
+              <TaskDescrip completed={task.complete}>{task.description}</TaskDescrip>
+            ))}
+          </TaskList>
+        </>
+      ) : (
+        <TaskTitle noTasks>No tasks</TaskTitle>
+      )}
     </TaskWrapper>
   );
 };
