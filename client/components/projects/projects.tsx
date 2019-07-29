@@ -4,8 +4,8 @@ import { useQuery } from 'urql';
 import * as Types from '~components/projects/types';
 import Project from '~components/projects/project';
 
-const fetchProjects = `query FetchProjects($token: String!, $filter: String!) {
-  projects(token: $token, filter: $filter) {
+const fetchProjects = `query FetchProjects($filter: String!) {
+  projects(filter: $filter) {
     ... on Error {
       code
       error
@@ -38,14 +38,10 @@ const fetchProjects = `query FetchProjects($token: String!, $filter: String!) {
   }
 }`;
 
-interface Props {
-  token: String;
-}
-
-const Projects = ({ token }: Props) => {
+const Projects = () => {
   const [res] = useQuery({
     query: fetchProjects,
-    variables: { token, filter: 'label:"needs-review"' },
+    variables: { filter: 'label:"needs-review"' },
   });
 
   if (res.fetching) {

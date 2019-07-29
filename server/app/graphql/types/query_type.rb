@@ -35,15 +35,14 @@ module Types
 
     field :projects, ProjectResponse, null: false do
       description 'List of projects for that user'
-      argument :token, String, required: true
       argument :filter, String, required: true
     end
 
-    def projects(token:, filter:)
-      user = User.find_by(api_token: token)
+    def projects(filter:)
+      user = User.find_by(email: context[:current_user][:email])
       return [] if filter.empty? || user.nil?
 
-      user.find_projects_stories(token: token, filter: filter)
+      user.find_projects_stories(token: user[:api_token], filter: filter)
     rescue TrackerApi::Errors::ClientError, TrackerApi::Errors::ServerError => e
       e.response.with_indifferent_access[:body]
     end

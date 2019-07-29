@@ -27,7 +27,7 @@ const TokenPrompt = () => {
   });
 
   if (res.data && res.data.isApiTokenValid) {
-    return <Homepage token={token} />;
+    return <Homepage />;
   }
 
   return (

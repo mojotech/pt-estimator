@@ -88,20 +88,6 @@
               "description": "List of projects for that user",
               "args": [
                 {
-                  "name": "token",
-                  "description": null,
-                  "type": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "String",
-                      "ofType": null
-                    }
-                  },
-                  "defaultValue": null
-                },
-                {
                   "name": "filter",
                   "description": null,
                   "type": {
