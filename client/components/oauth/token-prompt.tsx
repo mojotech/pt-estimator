@@ -14,7 +14,7 @@ const TokenPrompt = () => {
   const [token, setToken] = useState();
   const tokenRef = useRef<HTMLInputElement>(null);
 
-  const onSubmit = () => {
+  const onSubmit = event => {
     event.preventDefault();
     setToken(tokenRef.current.value);
   };
