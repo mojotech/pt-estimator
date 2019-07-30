@@ -1,14 +1,30 @@
 class GraphqlController < ApplicationController
+  include ::ActionController::Cookies
+
   def execute
     variables = ensure_hash(params[:variables])
     query = params[:query]
     operation_name = params[:operationName]
+
+    current_user = GoogleIDToken::Validator.new.check(cookies[:jwt], ENV['REACT_APP_GOOGLE_CLIENT_ID'])
+                   .with_indifferent_access.slice(:email, :name, :given_name, :family_name, :picture)
+    
+    current_user[:first_name] = current_user.delete :given_name
+    current_user[:last_name] = current_user.delete :family_name
+    current_user[:img_url] = current_user.delete :picture
+    found_user = User.find_by(email: current_user[:email])
+    if found_user.nil?
+      found_user = User.create!(current_user)
+    else
+      found_user.update(current_user)
+    end
+
     context = {
-      # Query context goes here, for example:
-      # current_user: current_user,
+      current_user: found_user,
     }
     result = PtEstimatorSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
+
   rescue => e
     raise e unless Rails.env.development?
     handle_error_in_development e

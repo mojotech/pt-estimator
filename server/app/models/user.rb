@@ -3,7 +3,7 @@
 class User < ApplicationRecord
   has_and_belongs_to_many :projects
 
-  def valid_token?(email:, token:)
+  def self.valid_token?(email:, token:)
     client = TrackerApi::Client.new(token: token)
     client.me.email == email
   rescue StandardError

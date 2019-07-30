@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { GoogleLogin, GoogleLoginResponse } from 'react-google-login';
+import { useCookies } from 'react-cookie';
 
 import { setUser } from '~redux/actions/user';
 
@@ -9,9 +10,12 @@ interface Props {
 }
 
 const OAuth = ({ history }: Props) => {
+  const [, setCookie] = useCookies(['jwt']);
+
   const dispatch = useDispatch();
 
   const oAuthSuccess = (response: GoogleLoginResponse) => {
+    setCookie('jwt', response.getAuthResponse().id_token, { path: '/' });
     dispatch(setUser(response));
     history.push('/success');
   };
