@@ -3,8 +3,8 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import Story from '~components/story/story';
 import OAuth from '~components/oauth/oauth';
-import OAuthFailure from '~components/oauth/oauthFailure';
-import OAuthSuccess from '~components/oauth/oauthSuccess';
+import OAuthFailure from '~components/oauth/oauth-failure';
+import OAuthSuccess from '~components/oauth/oauth-success';
 import NavBar from '~nav-bar';
 import PivotalConnect from '~components/ptconnect/pivotal-connect';
 
