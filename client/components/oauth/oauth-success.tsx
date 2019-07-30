@@ -3,7 +3,7 @@ import { useStore } from 'react-redux';
 import { useQuery } from 'urql';
 
 import OAuth from '~/components/oauth/oauth';
-import TokenPrompt from '~components/oauth/tokenPrompt';
+import TokenPrompt from '~components/oauth/token-prompt';
 import Homepage from '~components/Homepage';
 
 const fetchUser = `query FetchUser($data: UserInput!){
