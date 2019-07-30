@@ -1,6 +1,8 @@
 import React from 'react';
 
 import * as Types from '~components/projects/types';
+import NewComment from './newComment';
+import Comment from './comment';
 
 interface Props {
   data: Types.Story;
@@ -18,14 +20,9 @@ const Story = ({ data }: Props) => {
       <h4>type</h4>
       <p>{data.storyType}</p>
       <h4>comments</h4>
+      <NewComment storyId={data.id} />
       {data.comments.map(comment => {
-        return (
-          <div key={comment.id}>
-            <h6>{comment.text} </h6>
-            <p>{comment.createdAt}</p>
-            <p>person id: {comment.personId}</p>
-          </div>
-        );
+        return <Comment key={comment.id} data={comment} />;
       })}
       <h4>tasks:</h4>
       {data.tasks.map(task => {

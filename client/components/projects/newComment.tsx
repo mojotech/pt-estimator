@@ -1,0 +1,49 @@
+import React, { useRef } from 'react';
+import { useMutation } from 'urql';
+import { useStore } from 'react-redux';
+
+const addComment = `mutation AddComment($storyId: String!, $text: String!) {
+  createComment(storyId: $storyId, text: $text) {
+    ... on Story {
+      comments {
+        createdAt
+        id
+        personId
+        text
+      }
+    }
+    ... on Error {
+      code
+      error
+      kind
+      possibleFix
+    }
+  }
+}`;
+
+interface Props {
+  storyId: String;
+}
+
+const NewComment = ({ storyId }: Props) => {
+  const state = useStore().getState();
+
+  const commentRef = useRef<HTMLInputElement>(null);
+
+  const [, executeMutation] = useMutation(addComment);
+
+  const onSubmit = event => {
+    event.preventDefault();
+    executeMutation({ storyId: storyId, text: commentRef.current.value });
+    commentRef.current.value = '';
+  };
+
+  return (
+    <form onSubmit={onSubmit}>
+      <input placeholder="Add a comment to this story" required ref={commentRef} />
+      <input type="submit" />
+    </form>
+  );
+};
+
+export default NewComment;
