@@ -34,6 +34,10 @@ const fetchProjects = `query FetchProjects($filter: String!) {
             description
             complete
           }
+          labels {
+            id
+            name
+          }
           estimate
         }
       }

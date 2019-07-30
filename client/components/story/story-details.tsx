@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { fonts, colors, fontSizes, spacing } from '~lib/theme';
+import { Label as LabelType } from '~components/projects/types';
 const Star = require('~assets/images/star.svg').default;
 const RightUp = require('~assets/images/right-up.svg').default;
 const Link = require('~assets/images/link.svg').default;
@@ -83,13 +84,20 @@ const LinkUnderline = () => (
   </svg>
 );
 
-const Details: React.FC<{}> = props => (
+interface DetailsProps {
+  id: string;
+  type: string;
+  labels: LabelType[];
+}
+
+const Details = ({ id, type, labels }: DetailsProps) => (
   <>
     <DetailsWrapper>
       <FeatureIcon />
-      <NumberText>#166168701</NumberText>
-      <Tag>awaydates</Tag>
-      <Tag>admin</Tag>
+      <NumberText>{`#${id}`}</NumberText>
+      {labels.map(label => (
+        <Tag key={label.id}>{label.name}</Tag>
+      ))}
       <LinkWrapper>
         <ActionWrapper>
           <LinkText>View in Pivotal Tracker</LinkText>

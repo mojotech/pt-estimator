@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { colors, fonts, fontSizes, spacing } from '~lib/theme';
+import { colors, fontSizes, spacing } from '~lib/theme';
+import { Task as TaskType } from '~components/projects/types';
 
 const TaskTitle = styled.div`
   font-size: ${fontSizes.large};
@@ -33,11 +34,6 @@ const TaskWrapper = styled.div`
   margin-left: ${spacing.xl};
 `;
 
-export type TaskType = {
-  completed: boolean;
-  description: string;
-};
-
 interface TasksProps {
   tasks: TaskType[];
 }
@@ -48,7 +44,7 @@ const Tasks = ({ tasks }: TasksProps) => {
       <TaskTitle>Tasks</TaskTitle>
       <ul>
         {tasks.map(task => (
-          <TaskDescrip completed={task.completed}>{task.description}</TaskDescrip>
+          <TaskDescrip completed={task.complete}>{task.description}</TaskDescrip>
         ))}
       </ul>
     </TaskWrapper>

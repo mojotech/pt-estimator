@@ -32,15 +32,14 @@ export const Divider = () => (
 );
 
 interface BodyProps {
+  title: string;
   text: string;
 }
 
-const Description = ({ text }: BodyProps) => {
+const Description = ({ title, text }: BodyProps) => {
   return (
     <DescripWrapper>
-      <DescripTitle>
-        Properties w/ existing tenants attached to them can not be deleted.
-      </DescripTitle>
+      <DescripTitle>{title}</DescripTitle>
       <DescripBody>{text}</DescripBody>
       <Divider />
     </DescripWrapper>

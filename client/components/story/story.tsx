@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import Description from '~components/story/story-description';
-import Tasks, { TaskType } from '~components/story/story-tasks';
+import Tasks from '~components/story/story-tasks';
 import Details from '~components/story/story-details';
-import { colors, fonts, fontSizes, spacing } from '~lib/theme';
+import { fontSizes, spacing } from '~lib/theme';
+import { Story as StoryType } from '~components/projects/types';
 
 const StoryWrapper = styled.div`
   padding-top: 138px;
@@ -23,36 +24,20 @@ export const CommentDivider = () => (
   </svg>
 );
 
-const body =
-  '1. Prevent an admin from deleting a property (with a nice error message) until the admin has either deleted all' +
-  'tenants attached to the property, or reassigned the tenants to a different property.\n\n2. Remove tenants from the ' +
-  'property at the time the property is deleted. I am not sure where the tenants should go at that time. Delete them?' +
-  'Reassign them? Have them assigned to nothing, and when the admin goes to edit the tenant, force the admin to select' +
-  ' a new property?';
+interface StoryProps {
+  data: StoryType;
+}
 
-const taskList: TaskType[] = [
-  {
-    completed: true,
-    description: 'Backend: Create UnitAccessibility database schema',
-  },
-  {
-    completed: false,
-    description: 'Backend: Admin can edit UniteAccessiblities from the admin portal',
-  },
-  {
-    completed: false,
-    description: 'Backend: Tenant can get a list of their UniteAccessibilites in a date range',
-  },
-];
-
-const Story = () => {
+const Story = ({
+  data: { id, name, description, storyType, comments, tasks, labels, estimate },
+}: StoryProps) => {
   return (
     <>
       <StoryWrapper>
-        <Details />
-        <Description text={body} />
-        <Tasks tasks={taskList} />
-        <CommentTitle>Comments (3)</CommentTitle>
+        <Details id={id} type={storyType} labels={labels} />
+        <Description title={name} text={description} />
+        <Tasks tasks={tasks} />
+        <CommentTitle>{`Comments (${comments.length})`}</CommentTitle>
         <CommentDivider />
       </StoryWrapper>
     </>
