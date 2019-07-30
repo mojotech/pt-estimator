@@ -14,9 +14,9 @@ const TokenPrompt = () => {
   const [token, setToken] = useState();
   const tokenRef = useRef<HTMLInputElement>(null);
 
-  const onSubmit = () => {
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setToken(tokenRef.current.value);
+    setToken(tokenRef.current!.value);
   };
 
   const [res] = useQuery({
