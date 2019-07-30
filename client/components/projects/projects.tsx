@@ -1,7 +1,9 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { useQuery } from 'urql';
+import { ReduxState } from '~redux/reducers';
 
-import * as Types from '~components/projects/types';
+import NavBar from '~components/projects/nav-bar';
 import Project from '~components/projects/project';
 
 const fetchProjects = `query FetchProjects($filter: String!) {
@@ -15,6 +17,7 @@ const fetchProjects = `query FetchProjects($filter: String!) {
     ... on ProjectCollection {
       all {
         id
+        name
         stories {
           id
           name
@@ -39,6 +42,8 @@ const fetchProjects = `query FetchProjects($filter: String!) {
 }`;
 
 const Projects = () => {
+  const currentProject = useSelector((state: ReduxState) => state.project);
+
   const [res] = useQuery({
     query: fetchProjects,
     variables: { filter: 'label:"needs-review"' },
@@ -47,12 +52,16 @@ const Projects = () => {
   if (res.fetching) {
     return <>Loading GraphQL...</>;
   } else if (res.error) {
+    console.log(res.error);
     return <>GraphQL Error</>;
   }
 
-  return res.data.projects.all.map((project: Types.Project) => {
-    return <Project key={project.id} data={project} />;
-  });
+  return (
+    <>
+      <NavBar projects={res.data.projects.all} />
+      <Project key={currentProject.id} data={currentProject} />
+    </>
+  );
 };
 
 export default Projects;
