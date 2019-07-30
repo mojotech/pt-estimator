@@ -18,7 +18,7 @@ class User < ApplicationRecord
   def list_user_project_stories(projects:, filter:)
     self.projects.delete_all
     projects.map do |p|
-      pr = Project.first_or_initialize(id: p.id)
+      pr = Project.find_or_create_by(id: p.id)
       self.projects << pr
       st = Story.filter_stories_to_review(pt_project: p, db_project: pr,
                                           filter: filter)
