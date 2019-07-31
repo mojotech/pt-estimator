@@ -18,11 +18,13 @@ class User < ApplicationRecord
   def list_user_project_stories(projects:, filter:)
     self.projects.delete_all
     projects.map do |p|
-      pr = Project.find_or_create_by(id: p.id)
+      pr = Project.find_or_initialize_by(id: p.id)
+      pr.name = p.name
+      pr.save!
       self.projects << pr
       st = Story.filter_stories_to_review(pt_project: p, db_project: pr,
                                           filter: filter)
-      { id: pr[:id], stories: st } unless st.empty?
+      { id: pr[:id], name: pr[:name], stories: st } unless st.empty?
     end .compact
   end
 end

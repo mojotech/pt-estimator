@@ -5,6 +5,7 @@ module Types
     graphql_name 'Project'
 
     field 'id', ID, null: false
+    field 'name', String, null: false
     field 'stories', [StoryType], null: false
   end
 end
