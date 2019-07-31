@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
+import { fontSizes, fonts, colors, spacing } from '~lib/theme';
+
+import BuildStoryButton from '~components/review/build-story-button';
 import LinkArrow from '~assets/images/link-arrow-light.svg';
-import StoryReview from '~components/review/story-review-type';
-import { colors, fonts, fontSizes, spacing } from '~lib/theme';
+import { Story } from '~components/projects/types';
 
 const labelName = 'needs-label';
 
@@ -70,75 +72,6 @@ const SmallText = styled.div`
   margin-top: 18px;
 `;
 
-const StoryRectangle = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
-const RectangleWrapper = styled.li<StoryNumberTextProps>`
-  height: 62px;
-  border-radius: 2px;
-  background-color: ${colors.charcoal};
-  border-color: ${colors.charcoal};
-  font-family: ${fonts.neueHass};
-  font-size: ${fontSizes.large};
-  line-height: 1.33;
-  color: ${colors.white};
-  opacity: ${props => (props.isHovering ? 1 : 0.6)};
-  margin-bottom: 5px;
-`;
-
-interface StoryNumberTextProps {
-  isHovering: boolean;
-}
-
-const StoryNumberText = styled.div`
-  font-family: ${fonts.neueHass};
-  font-size: ${fontSizes.large};
-  line-height: 1.33;
-  color: ${colors.white};
-  margin: 18px;
-  margin-left: 0px;
-`;
-
-const StoryText = styled.div`
-  margin-left: ${spacing.l};
-  margin-bottom: 5px;
-`;
-
-const EstimateBox = styled.div`
-  width: 24px;
-  height: 24px;
-  border-radius: 2px;
-  background-color: #ffca41;
-  color: #fece3c;
-  text-align: center;
-  margin: ${spacing.m};
-`;
-
-const EstimateBoxNumber = styled.div`
-  font-family: ${fonts.america};
-  font-size: ${fontSizes.medium};
-  line-height: 1.5;
-  color: ${colors.charcoal};
-`;
-
-const EmptyEstimateBox = styled.div`
-  width: 24px;
-  height: 24px;
-  border-radius: 2px;
-  border: solid 1px rgba(255, 255, 255, 0.1);
-  margin: ${spacing.m};
-`;
-
-const UnderLine = styled.div`
-  width: 100%;
-  height: 1px;
-  background-color: #ffffff;
-  margin-top: 5px;
-`;
-
 const DarkUnderLine = styled.div`
   width: 100%;
   margin-top: 5px;
@@ -167,21 +100,21 @@ const LinkIcon = styled(LinkArrow)`
   margin-left: 8px;
 `;
 
-interface StoryArrayTypeProps {
-  stories: StoryReview[];
+interface Props {
+  stories: Story[];
 }
 
-const StoryReviewList = (storyArray: StoryArrayTypeProps) => {
+const StoryReviewList = ({ stories }: Props) => {
   return (
     <Wrapper>
       <Column>
         <Row>
-          <Title>You have {storyArray.stories.length} stories to review.</Title>
+          <Title>You have {stories.length} stories to review.</Title>
           <SmallText>Your Estimate</SmallText>
         </Row>
         <NumberedList>
-          {storyArray.stories.map(story => (
-            <StoryButton {...story} key={story.storyID} />
+          {stories.map((story, index) => (
+            <BuildStoryButton story={story} index={index} key={story.id} />
           ))}
         </NumberedList>
         <BottomTextRow>
@@ -196,33 +129,6 @@ const StoryReviewList = (storyArray: StoryArrayTypeProps) => {
         </BottomTextRow>
       </Column>
     </Wrapper>
-  );
-};
-
-const StoryButton = (story: StoryReview) => {
-  const [isHovering, isHoveringToggle] = useState(false);
-  return (
-    <RectangleWrapper
-      isHovering={isHovering}
-      onMouseEnter={() => isHoveringToggle(!isHovering)}
-      onMouseLeave={() => isHoveringToggle(!isHovering)}
-    >
-      <StoryRectangle>
-        <StoryNumberText>
-          <StoryText>
-            {story.storyName}
-            {isHovering && <UnderLine />}
-          </StoryText>
-        </StoryNumberText>
-        {story.estimateValue ? (
-          <EstimateBox>
-            <EstimateBoxNumber>{story.estimateValue}</EstimateBoxNumber>
-          </EstimateBox>
-        ) : (
-          <EmptyEstimateBox />
-        )}
-      </StoryRectangle>
-    </RectangleWrapper>
   );
 };
 

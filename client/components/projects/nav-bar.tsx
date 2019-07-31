@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
-import { useStore } from 'react-redux';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
+import { fontSizes, colors, spacing, fonts } from '~lib/theme';
+import profileIcon from '~assets/images/profileIcon.png';
 import ProjectsDropdown from '~components/projects/projects-dropdown';
 import * as Types from '~components/projects/types';
 import StoryReviewList from '~components/review/story-review-list';
-import DropDownIcon from '~assets/images/drop-down.svg';
-import { colors, fontSizes, spacing } from '~lib/theme';
+import { toggleStoryList } from '~redux/actions/toggle-story-list';
+import { ReduxState } from '~redux/reducers';
 
 const Header = styled.div`
   display: flex;
@@ -43,10 +45,6 @@ const Notifications = styled(NavButton)<NotificationProps>`
   background-color: ${props => (props.showStoryList ? colors.warmGrey : colors.charcoal)};
 `;
 
-const DropDown = styled(DropDownIcon)`
-  padding-left: 5px;
-`;
-
 const UnderLine = styled.div`
   width: 120%;
   height: 1px;
@@ -60,28 +58,25 @@ interface Props {
 }
 
 const NavBar = ({ projects, stories }: Props) => {
-  const [showStoryList, toggleStoryList] = useState(false);
-  const state = useStore().getState();
+  const toggle = useSelector((state: ReduxState) => state.toggleStory.isVisible);
 
-  const storyReviews = [];
-  stories.forEach(story => {
-    storyReviews.push({ storyName: story.name, estimateValue: null, storyID: story.id });
-  }); // TODO: get estimate value from the database migration to add estimates
+  const dispatch = useDispatch();
+
+  const onClick = () => {
+    dispatch(toggleStoryList());
+  };
 
   return (
     <>
       <Header>
         <ProjectsDropdown projects={projects} />
-        <Notifications
-          onClick={() => toggleStoryList(!showStoryList)}
-          showStoryList={showStoryList}
-        >
+        <Notifications onClick={onClick} showStoryList={toggle}>
           1 of {stories.length}
           <UnderLine />
         </Notifications>
         <ProfileImage src={state.user.imgUrl} />
       </Header>
-      {showStoryList && <StoryReviewList collection={storyReviews} />}
+      {toggle && <StoryReviewList stories={stories} />}
     </>
   );
 };
