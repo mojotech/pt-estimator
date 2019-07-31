@@ -18,9 +18,13 @@ class User < ApplicationRecord
   def list_user_project_stories(projects:, filter:)
     self.projects.delete_all
     projects.map do |p|
+<<<<<<< HEAD
       pr = Project.find_or_initialize_by(id: p.id)
       pr.name = p.name
       pr.save!
+=======
+      pr = Project.find_or_create_by(id: p.id)
+>>>>>>> d73ae02... feat: add a comment to a story
       self.projects << pr
       st = Story.filter_stories_to_review(pt_project: p, pt_members: p.memberships, db_project: pr,
                                           filter: filter)

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { spacing, fontSizes, colors, fonts } from '~lib/theme';
 import { Comment as CommentType } from '~components/projects/types';
 import { parseTimeAndDate } from '~lib/datetime';
+import NewComment from '~components/story/new-comment';
 
 const CommentTitle = styled.div`
   color: #363333;
@@ -117,10 +118,12 @@ const Comment = ({ comment }: CommentProp) => {
 };
 
 interface CommentsProps {
+  storyId: string;
+  projectId: string;
   comments: Array<CommentType>;
 }
 
-const Comments = ({ comments }: CommentsProps) => {
+const Comments = ({ storyId, projectId, comments }: CommentsProps) => {
   const [showComments, setShowComments] = useState(false);
 
   return (
@@ -129,7 +132,14 @@ const Comments = ({ comments }: CommentsProps) => {
         <CommentTitle>{`Comments (${comments.length})`}</CommentTitle>
         <CommentDivider commentsShown={showComments} />
       </ShowComments>
-      {showComments && comments.map(comment => <Comment key={comment.id} comment={comment} />)}
+      {showComments && (
+        <>
+          <NewComment projectId={projectId} storyId={storyId} />
+          {comments.map(comment => (
+            <Comment key={comment.id} comment={comment} />
+          ))}
+        </>
+      )}
     </>
   );
 };

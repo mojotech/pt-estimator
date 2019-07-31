@@ -573,7 +573,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "SCALAR",
-                  "name": "Int",
+                  "name": "String",
                   "ofType": null
                 }
               },
@@ -603,16 +603,6 @@
           "interfaces": [
 
           ],
-          "enumValues": null,
-          "possibleTypes": null
-        },
-        {
-          "kind": "SCALAR",
-          "name": "Int",
-          "description": "Represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.",
-          "fields": null,
-          "inputFields": null,
-          "interfaces": null,
           "enumValues": null,
           "possibleTypes": null
         },
@@ -781,6 +771,20 @@
               "args": [
                 {
                   "name": "storyId",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "projectId",
                   "description": null,
                   "type": {
                     "kind": "NON_NULL",

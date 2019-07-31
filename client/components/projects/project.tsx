@@ -12,7 +12,7 @@ const Project = ({ data }: Props) => {
     <>
       <h1>Project {data.id}</h1>
       {data.stories.map(story => (
-        <Story key={story.id} data={story} />
+        <Story key={story.id} projectId={data.id} data={story} />
       ))}
     </>
   );
