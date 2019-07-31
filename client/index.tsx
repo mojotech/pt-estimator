@@ -9,7 +9,7 @@ const createClient = () =>
   new Client({ url: '/graphql', fetchOptions: { credentials: 'include' } });
 
 const AppClient: React.SFC = () => {
-  const email = useSelector((state: ReduxState) => state.email);
+  const email = useSelector((state: ReduxState) => state.user.email);
   const client = useMemo(createClient, [email]);
   return (
     <UrqlProvider value={client}>

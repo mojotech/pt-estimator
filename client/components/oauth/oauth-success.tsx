@@ -28,7 +28,7 @@ const OAuthSuccess = ({ history }: Props) => {
     return <>GraphQL Error</>;
   }
 
-  if (state.email) {
+  if (state.user.email) {
     if (res.data.hasApiToken === true) {
       return <Homepage />;
     } else {

@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import { fontSizes, colors, spacing } from '~lib/theme';
 import profileIcon from '~assets/images/profileIcon.png';
-import dropDown from '~assets/images/dropDown.svg';
+import * as Types from '~components/projects/types';
+import ProjectsDropdown from '~components/projects/projects-dropdown';
 
 const Header = styled.div`
   display: flex;
@@ -20,18 +22,8 @@ const NavButton = styled.button`
   justify-content: center;
 `;
 
-const Projects = styled(NavButton)`
-  > img {
-    padding: 10px 7px;
-  }
-`;
-
 const Notifications = styled(NavButton)`
   flex-direction: column;
-`;
-
-const DropDown = styled(dropDown)`
-  padding-left: 5px;
 `;
 
 const UnderLine = styled.div`
@@ -41,13 +33,14 @@ const UnderLine = styled.div`
   margin-top: 4px;
 `;
 
-const NavBar = () => {
+interface Props {
+  projects: Types.Project[];
+}
+
+const NavBar = ({ projects }: Props) => {
   return (
     <Header>
-      <Projects>
-        <span>Daydream</span>
-        <DropDown />
-      </Projects>
+      <ProjectsDropdown projects={projects} />
       <Notifications>
         1 of 7
         <UnderLine />

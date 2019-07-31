@@ -1,27 +1,19 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import Story from '~components/story/story';
 import OAuth from '~components/oauth/oauth';
 import OAuthFailure from '~components/oauth/oauth-failure';
 import OAuthSuccess from '~components/oauth/oauth-success';
-import NavBar from '~nav-bar';
-import PivotalConnect from '~components/ptconnect/pivotal-connect';
 
 const App: React.SFC = () => {
   return (
-    <>
-      <NavBar />
-      <BrowserRouter>
-        <Switch>
-          <Route path="/failure" component={OAuthFailure} />
-          <Route path="/success" component={OAuthSuccess} />
-          <Route exact path="/" component={OAuth} />
-          <Route exact path="/test-story" component={Story} />
-          <Route exact path="/test-pivotal-connect" component={PivotalConnect} />
-        </Switch>
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/failure" component={OAuthFailure} />
+        <Route path="/success" component={OAuthSuccess} />
+        <Route exact path="/" component={OAuth} />
+      </Switch>
+    </BrowserRouter>
   );
 };
 
