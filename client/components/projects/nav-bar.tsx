@@ -5,19 +5,8 @@ import styled from 'styled-components';
 import ProjectsDropdown from '~components/projects/projects-dropdown';
 import * as Types from '~components/projects/types';
 import StoryReviewList from '~components/review/story-review-list';
-import StoryReview from '~components/review/story-review-type';
-import { colors, fonts, fontSizes, spacing } from '~lib/theme';
-
-const stories: StoryReview[] = [
-  {
-    storyName: 'Properties with existing Tenants attached them can’t be deleted',
-    estimateValue: 3,
-    storyID: 0,
-  },
-  { storyName: 'Welcome email (HTML)', estimateValue: 2, storyID: 1 },
-  { storyName: 'Make first and last name separate fields', estimateValue: null, storyID: 2 },
-  { storyName: 'Admin: edit resident away dates', estimateValue: null, storyID: 3 },
-];
+import DropDownIcon from '~assets/images/drop-down.svg';
+import { colors, fontSizes, spacing } from '~lib/theme';
 
 const Header = styled.div`
   display: flex;
@@ -54,6 +43,10 @@ const Notifications = styled(NavButton)<NotificationProps>`
   background-color: ${props => (props.showStoryList ? colors.warmGrey : colors.charcoal)};
 `;
 
+const DropDown = styled(DropDownIcon)`
+  padding-left: 5px;
+`;
+
 const UnderLine = styled.div`
   width: 120%;
   height: 1px;
@@ -63,11 +56,17 @@ const UnderLine = styled.div`
 
 interface Props {
   projects: Types.Project[];
+  stories: Types.Story[];
 }
 
-const NavBar = ({ projects }: Props) => {
+const NavBar = ({ projects, stories }: Props) => {
   const [showStoryList, toggleStoryList] = useState(false);
   const state = useStore().getState();
+
+  const storyReviews = [];
+  stories.forEach(story => {
+    storyReviews.push({ storyName: story.name, estimateValue: null, storyID: story.id });
+  }); // TODO: get estimate value from the database migration to add estimates
 
   return (
     <>
@@ -82,7 +81,7 @@ const NavBar = ({ projects }: Props) => {
         </Notifications>
         <ProfileImage src={state.user.imgUrl} />
       </Header>
-      {showStoryList && <StoryReviewList stories={stories} />}
+      {showStoryList && <StoryReviewList collection={storyReviews} />}
     </>
   );
 };

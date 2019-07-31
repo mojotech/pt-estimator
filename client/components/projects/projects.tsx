@@ -56,14 +56,12 @@ const Projects = () => {
   if (res.fetching) {
     return <>Loading GraphQL...</>;
   } else if (res.error) {
-    // tslint:disable-next-line no-console
-    console.error(res.error);
     return <>GraphQL Error</>;
   }
 
   return (
     <>
-      <NavBar projects={res.data.projects.all} />
+      <NavBar projects={res.data.projects.all} stories={currentProject.stories} />
       <Project key={currentProject.id} data={currentProject} />
     </>
   );
