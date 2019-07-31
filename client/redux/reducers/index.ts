@@ -1,10 +1,12 @@
 import { combineReducers, createStore } from 'redux';
-import { project } from './project';
 import { user } from './user';
+import { project } from './project';
+import { toggleStory } from './toggle-story-list';
 
 const reducers = combineReducers({
   user,
   project,
+  toggleStory,
 });
 
 const store = createStore(reducers);
