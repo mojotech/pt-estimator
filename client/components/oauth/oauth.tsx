@@ -3,7 +3,19 @@ import { useDispatch } from 'react-redux';
 import { GoogleLogin, GoogleLoginResponse } from 'react-google-login';
 import { useCookies } from 'react-cookie';
 
+import styled from 'styled-components';
 import { setUser } from '~redux/actions/user';
+
+const GoogleSignIn = styled.button`
+  width: 243px;
+  height: 66px;
+  align-self: center;
+  justify-content: center;
+`;
+
+const Wrapper = styled.div`
+  text-align: center;
+`;
 
 interface Props {
   history: { push: Function };
@@ -25,13 +37,16 @@ const OAuth = ({ history }: Props) => {
   };
 
   return (
-    <GoogleLogin
-      clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-      buttonText={'Login'}
-      onSuccess={oAuthSuccess}
-      onFailure={oAuthFailure}
-      cookiePolicy={'single_host_origin'}
-    />
+    <Wrapper>
+      <GoogleLogin
+        clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+        buttonText={'Sign in with Google'}
+        onSuccess={oAuthSuccess}
+        onFailure={oAuthFailure}
+        cookiePolicy={'single_host_origin'}
+        tag={GoogleSignIn}
+      />
+    </Wrapper>
   );
 };
 

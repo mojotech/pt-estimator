@@ -1,9 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-
-import OAuth from '~components/oauth/oauth';
 import OAuthFailure from '~components/oauth/oauth-failure';
 import OAuthSuccess from '~components/oauth/oauth-success';
+import SignInPage from '~components/oauth/sign-in';
 
 const App: React.SFC = () => {
   return (
@@ -11,7 +10,7 @@ const App: React.SFC = () => {
       <Switch>
         <Route path="/failure" component={OAuthFailure} />
         <Route path="/success" component={OAuthSuccess} />
-        <Route exact path="/" component={OAuth} />
+        <Route exact path="/" component={SignInPage} />
       </Switch>
     </BrowserRouter>
   );
