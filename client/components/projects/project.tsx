@@ -1,7 +1,7 @@
 import React from 'react';
 
 import * as Types from '~components/projects/types';
-import Story from '~components/projects/story';
+import Story from '~components/story/story';
 
 interface Props {
   data: Types.Project;

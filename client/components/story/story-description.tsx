@@ -15,7 +15,11 @@ const DescripTitle = styled.div`
   line-height: 1.31;
 `;
 
-const DescripBody = styled.div`
+interface BodyProps {
+  noDescrip?: boolean;
+}
+
+const DescripBody = styled.div<BodyProps>`
   color: ${colors.warmGrey};
   font-size: ${fontSizes.large};
   margin-bottom: 18px;
@@ -23,6 +27,7 @@ const DescripBody = styled.div`
   font-style: normal;
   line-height: 1.33;
   margin-bottom: 32px;
+  opacity: ${props => (props.noDescrip ? '0.5' : '1')};
 `;
 
 export const Divider = () => (
@@ -31,17 +36,21 @@ export const Divider = () => (
   </svg>
 );
 
-interface BodyProps {
+interface DescripProps {
+  title: string;
   text: string;
 }
 
-const Description = ({ text }: BodyProps) => {
+const Description = ({ title, text }: DescripProps) => {
   return (
     <DescripWrapper>
-      <DescripTitle>
-        Properties w/ existing tenants attached to them can not be deleted.
-      </DescripTitle>
-      <DescripBody>{text}</DescripBody>
+      <DescripTitle>{title}</DescripTitle>
+      {text !== null && text !== '' ? (
+        <DescripBody>{text}</DescripBody>
+      ) : (
+        <DescripBody noDescrip>There's no description for this story yet.</DescripBody>
+      )}
+
       <Divider />
     </DescripWrapper>
   );

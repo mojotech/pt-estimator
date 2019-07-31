@@ -20,8 +20,13 @@ class Story < ApplicationRecord
       { id: t.id, description: t.description, complete: t.complete }
     end .compact
 
+    remove_review = pt_story.labels.reject{ |l| l.name == 'needs-review'}
+    labels = remove_review.map do |l|
+      {id: l.id, name: l.name}
+    end .compact          
+
     st = pt_story.to_h.slice(:id, :name, :description, :story_type, :estimate)
-    st.merge!(tasks: tasks, comments: comms)
+    st.merge!(tasks: tasks, comments: comms, labels: labels)
   end
 
   def self.sort_comments(pt_coms:)

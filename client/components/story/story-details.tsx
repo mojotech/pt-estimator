@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { fonts, colors, fontSizes, spacing } from '~lib/theme';
-const Star = require('~assets/images/star.svg').default;
-const RightUp = require('~assets/images/right-up.svg').default;
-const Link = require('~assets/images/link.svg').default;
-const LinkArrow = require('~assets/images/link-arrow.svg').default;
+import { colors, fontSizes, spacing } from '~lib/theme';
+import { Label as LabelType } from '~components/projects/types';
+import Star from '~assets/images/feature-icon.svg';
+import Bug from '~assets/images/bug-icon.svg';
+import Gear from '~assets/images/chore-icon.svg';
+import LinkArrow from '~assets/images/link-arrow.svg';
 
 const DetailsWrapper = styled.div`
   display: flex;
@@ -16,17 +17,24 @@ const DetailsWrapper = styled.div`
 `;
 
 const FeatureIcon = styled(Star)`
-  width: 11.6px;
+  width: 16px;
   height: auto;
   fill: #ffb251;
   margin-right: ${spacing.s};
 `;
 
-const TypeText = styled.div`
-  color: #ffb251;
-  font-size: ${fontSizes.small};
-  font-weight: bold;
-  margin-right: ${spacing.m};
+const BugIcon = styled(Bug)`
+  width: 16px;
+  height: auto;
+  fill: #ffb251;
+  margin-right: ${spacing.s};
+`;
+
+const ChoreIcon = styled(Gear)`
+  width: 16px;
+  height: auto;
+  fill: #ffb251;
+  margin-right: ${spacing.s};
 `;
 
 const NumberText = styled.div`
@@ -52,6 +60,11 @@ const Tag = styled.div`
   margin-right: ${spacing.s};
 `;
 
+const LinkBar = styled.rect`
+transition: fill 0.2s ease;
+  fill #e1e1e1;
+`;
+
 const ActionWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -60,9 +73,10 @@ const ActionWrapper = styled.div`
 `;
 
 const LinkWrapper = styled.div`
-  margin-left: auto;
-  margin-right: 0;
   width: 162px;
+  &:hover ${LinkBar} {
+    fill: #ffca41;
+  }
 `;
 
 const LinkText = styled.div`
@@ -70,6 +84,28 @@ const LinkText = styled.div`
   font-size: 14px;
   color: #363333;
   margin-right: 8px;
+`;
+const PTLink = styled.a`
+  margin-left: auto;
+  margin-right: 0;
+  &:hover ${LinkBar} {
+    fill: #ffca41;
+  }
+  &:active ${LinkBar} {
+    fill: #ffca41;
+  }
+  &:link {
+    text-decoration: none;
+  }
+`;
+
+const ViewPT = styled.span`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
 `;
 
 const LinkIcon = styled(LinkArrow)`
@@ -79,24 +115,43 @@ const LinkIcon = styled(LinkArrow)`
 
 const LinkUnderline = () => (
   <svg width="100%" height="4">
-    <rect width="100%" height="2" fill="#e1e1e1" />
+    <LinkBar width="100%" height="2" />
   </svg>
 );
 
-const Details: React.FC<{}> = props => (
+interface IconProps {
+  type: string;
+}
+
+const TypeIcon = ({ type }: IconProps) => {
+  if (type === 'feature') return <FeatureIcon />;
+  if (type === 'bug') return <BugIcon />;
+  return <ChoreIcon />;
+};
+
+interface DetailsProps {
+  id: string;
+  type: string;
+  labels: LabelType[];
+}
+
+const Details = ({ id, type, labels }: DetailsProps) => (
   <>
     <DetailsWrapper>
-      <FeatureIcon />
-      <NumberText>#166168701</NumberText>
-      <Tag>awaydates</Tag>
-      <Tag>admin</Tag>
-      <LinkWrapper>
-        <ActionWrapper>
-          <LinkText>View in Pivotal Tracker</LinkText>
-          <LinkIcon />
-        </ActionWrapper>
-        <LinkUnderline />
-      </LinkWrapper>
+      <TypeIcon type={type} />
+      <NumberText>{`#${id}`}</NumberText>
+      {labels.map(label => (
+        <Tag key={label.id}>{label.name}</Tag>
+      ))}
+      <PTLink href={`https://www.pivotaltracker.com/story/show/${id}`}>
+        <LinkWrapper>
+          <ActionWrapper>
+            <LinkText>View in Pivotal Tracker</LinkText>
+            <LinkIcon />
+          </ActionWrapper>
+          <LinkUnderline />
+        </LinkWrapper>
+      </PTLink>
     </DetailsWrapper>
   </>
 );
