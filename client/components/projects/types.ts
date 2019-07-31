@@ -11,6 +11,7 @@ export interface Story {
   storyType: string;
   comments: Array<Comment>;
   tasks: Array<Task>;
+  labels: Array<Label>;
   estimate: Number;
 }
 
@@ -25,4 +26,9 @@ export interface Task {
   id: string;
   description: string;
   complete: boolean;
+}
+
+export interface Label {
+  id: string;
+  name: string;
 }

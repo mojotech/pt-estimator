@@ -11,5 +11,6 @@ module Types
     field 'tasks', [TaskType], null: false
     field 'comments', [CommentType], null: false
     field 'estimate', Float, null: true
+    field 'labels', [LabelType], null: true
   end
 end
