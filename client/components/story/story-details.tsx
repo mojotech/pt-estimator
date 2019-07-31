@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { fonts, colors, fontSizes, spacing } from '~lib/theme';
+import { colors, fontSizes, spacing } from '~lib/theme';
 import { Label as LabelType } from '~components/projects/types';
-const Star = require('~assets/images/star.svg').default;
-const RightUp = require('~assets/images/right-up.svg').default;
-const Link = require('~assets/images/link.svg').default;
+import Star from '~assets/images/feature-icon.svg';
+import Bug from '~assets/images/bug-icon.svg';
+import Gear from '~assets/images/chore-icon.svg';
 const LinkArrow = require('~assets/images/link-arrow.svg').default;
 
 const DetailsWrapper = styled.div`
@@ -17,17 +17,24 @@ const DetailsWrapper = styled.div`
 `;
 
 const FeatureIcon = styled(Star)`
-  width: 11.6px;
+  width: 16px;
   height: auto;
   fill: #ffb251;
   margin-right: ${spacing.s};
 `;
 
-const TypeText = styled.div`
-  color: #ffb251;
-  font-size: ${fontSizes.small};
-  font-weight: bold;
-  margin-right: ${spacing.m};
+const BugIcon = styled(Bug)`
+  width: 16px;
+  height: auto;
+  fill: #ffb251;
+  margin-right: ${spacing.s};
+`;
+
+const ChoreIcon = styled(Gear)`
+  width: 16px;
+  height: auto;
+  fill: #ffb251;
+  margin-right: ${spacing.s};
 `;
 
 const NumberText = styled.div`
@@ -84,6 +91,16 @@ const LinkUnderline = () => (
   </svg>
 );
 
+interface IconProps {
+  type: string;
+}
+
+const TypeIcon = ({ type }: IconProps) => {
+  if (type === 'feature') return <FeatureIcon />;
+  if (type === 'bug') return <BugIcon />;
+  return <ChoreIcon />;
+};
+
 interface DetailsProps {
   id: string;
   type: string;
@@ -93,7 +110,7 @@ interface DetailsProps {
 const Details = ({ id, type, labels }: DetailsProps) => (
   <>
     <DetailsWrapper>
-      <FeatureIcon />
+      <TypeIcon type={type} />
       <NumberText>{`#${id}`}</NumberText>
       {labels.map(label => (
         <Tag key={label.id}>{label.name}</Tag>
