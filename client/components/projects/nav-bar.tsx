@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useStore } from 'react-redux';
 import styled from 'styled-components';
 
 import profileIcon from '~assets/images/profileIcon.png';
@@ -36,17 +37,14 @@ const NavButton = styled.button`
   justify-content: center;
 `;
 
-const Projects = styled(NavButton)`
-  > img {
-    padding: 10px 7px;
-  }
+const ProfileImage = styled.img`
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  align-self: center;
 `;
 
-interface NotificationProps {
-  showStoryList: boolean;
-}
-
-const Notifications = styled(NavButton)<NotificationProps>`
+const Notifications = styled(NavButton)`
   flex-direction: column;
   width: 124px;
   height: 57px;
@@ -65,25 +63,17 @@ interface Props {
 }
 
 const NavBar = ({ projects }: Props) => {
-  const [showStoryList, toggleStoryList] = useState(false);
+  const state = useStore().getState();
 
   return (
-    <>
-      <Header>
-        <ProjectsDropdown projects={projects} />
-        <Notifications
-          onClick={() => toggleStoryList(!showStoryList)}
-          showStoryList={showStoryList}
-        >
-          1 of {stories.length}
-          <UnderLine />
-        </Notifications>
-        <NavButton>
-          <img src={profileIcon} />
-        </NavButton>
-      </Header>
-      {showStoryList && <StoryReviewList stories={stories} />}
-    </>
+    <Header>
+      <ProjectsDropdown projects={projects} />
+      <Notifications>
+        1 of 7
+        <UnderLine />
+      </Notifications>
+      <ProfileImage src={state.user.imgUrl} />
+    </Header>
   );
 };
 
