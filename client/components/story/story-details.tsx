@@ -19,7 +19,6 @@ const DetailsWrapper = styled.div`
 const FeatureIcon = styled(Star)`
   width: 16px;
   height: auto;
-  fill: #ffb251;
   margin-right: ${spacing.s};
 `;
 
