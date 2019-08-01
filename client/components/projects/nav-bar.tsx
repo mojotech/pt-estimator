@@ -59,6 +59,7 @@ interface Props {
 
 const NavBar = ({ projects, stories }: Props) => {
   const toggle = useSelector((state: ReduxState) => state.toggleStory.isVisible);
+  const storyPosition = useSelector((state: ReduxState) => state.story.storyPosition);
 
   const dispatch = useDispatch();
 
@@ -71,7 +72,7 @@ const NavBar = ({ projects, stories }: Props) => {
       <Header>
         <ProjectsDropdown projects={projects} />
         <Notifications onClick={onClick} showStoryList={toggle}>
-          1 of {stories.length}
+          {storyPosition} of {stories.length}
           <UnderLine />
         </Notifications>
         <ProfileImage src={state.user.imgUrl} />

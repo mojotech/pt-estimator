@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import { fontSizes, fonts, colors, spacing } from '~lib/theme';
 import { toggleStoryList } from '~redux/actions/toggle-story-list';
+import { setStory } from '~redux/actions/story';
 import { Story } from '~components/projects/types';
 
 const StoryRectangle = styled.div`
@@ -85,6 +86,7 @@ const BuildStoryButton = ({ story, index }: Props) => {
 
   const onClick = () => {
     dispatch(toggleStoryList());
+    dispatch(setStory(story, index + 1));
   };
 
   const [isHovering, isHoveringToggle] = useState(false);

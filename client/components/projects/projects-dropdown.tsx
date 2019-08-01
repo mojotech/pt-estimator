@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import dropDown from '~assets/images/dropDown.svg';
-import * as Types from '~components/projects/types';
-import { colors, fontSizes } from '~lib/theme';
+import { fontSizes, colors } from '~lib/theme';
 import { setProject } from '~redux/actions/project';
+import * as Types from '~components/projects/types';
+import { setStory } from '~redux/actions/story';
 
 const ProjectSelect = styled.select`
   > img {
@@ -34,11 +34,14 @@ const ProjectsDropdown = ({ projects }: Props) => {
 
   const onChange = event => {
     event.preventDefault();
-    dispatch(setProject(projects.find(pr => pr.id === event.target.value)));
+    const newProject = projects.find(pr => pr.id === event.target.value);
+    dispatch(setProject(newProject));
+    dispatch(setStory(newProject.stories[0], 1));
   };
 
   useEffect(() => {
     dispatch(setProject(projects[0]));
+    dispatch(setStory(projects[0].stories[0], 1));
   }, []);
 
   return (

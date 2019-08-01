@@ -1,20 +1,13 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { ReduxState } from '~redux/reducers';
 
-import * as Types from '~components/projects/types';
 import StoryPanel from '~components/story-panel';
 
-interface Props {
-  data: Types.Project;
-}
+const Project = () => {
+  const currentStory = useSelector((state: ReduxState) => state.story);
 
-const Project = ({ data }: Props) => {
-  return (
-    <>
-      {data.stories.length > 0 ? (
-        <StoryPanel key={data.stories[0].id} data={data.stories[0]} />
-      ) : null}
-    </>
-  );
+  return currentStory.storyPosition != null ? <StoryPanel data={currentStory.story} /> : <></>;
 };
 
 export default Project;

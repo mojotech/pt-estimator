@@ -62,7 +62,7 @@ const Projects = () => {
   return (
     <>
       <NavBar projects={res.data.projects.all} stories={currentProject.stories} />
-      <Project key={currentProject.id} data={currentProject} />
+      <Project />
     </>
   );
 };
