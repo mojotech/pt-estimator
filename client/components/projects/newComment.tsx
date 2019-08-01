@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
-import { useMutation } from 'urql';
 import { useStore } from 'react-redux';
+import { useMutation } from 'urql';
 
 const addComment = `mutation AddComment($storyId: String!, $text: String!) {
   createComment(storyId: $storyId, text: $text) {
@@ -22,7 +22,7 @@ const addComment = `mutation AddComment($storyId: String!, $text: String!) {
 }`;
 
 interface Props {
-  storyId: String;
+  storyId: string;
 }
 
 const NewComment = ({ storyId }: Props) => {
@@ -34,7 +34,7 @@ const NewComment = ({ storyId }: Props) => {
 
   const onSubmit = event => {
     event.preventDefault();
-    executeMutation({ storyId: storyId, text: commentRef.current.value });
+    executeMutation({ storyId, text: commentRef.current.value });
     commentRef.current.value = '';
   };
 

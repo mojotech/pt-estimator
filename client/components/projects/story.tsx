@@ -1,8 +1,8 @@
 import React from 'react';
 
 import * as Types from '~components/projects/types';
-import NewComment from './newComment';
 import Comment from './comment';
+import NewComment from './newComment';
 
 interface Props {
   data: Types.Story;

@@ -86,6 +86,8 @@ jobs:
 
       - run: yarn run format:check
 
+      - run: yarn run lint
+
 workflows:
   version: 2.1
   build:

@@ -1,7 +1,8 @@
+import { History } from 'history';
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { GoogleLogin, GoogleLoginResponse } from 'react-google-login';
 import { useCookies } from 'react-cookie';
+import { GoogleLogin, GoogleLoginResponse } from 'react-google-login';
+import { useDispatch } from 'react-redux';
 
 import styled from 'styled-components';
 import { setUser } from '~redux/actions/user';
@@ -18,7 +19,7 @@ const Wrapper = styled.div`
 `;
 
 interface Props {
-  history: { push: Function };
+  history: History;
 }
 
 const OAuth = ({ history }: Props) => {

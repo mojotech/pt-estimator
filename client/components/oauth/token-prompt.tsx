@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useStore } from 'react-redux';
 import { useQuery } from 'urql';
 
@@ -22,7 +22,7 @@ const TokenPrompt = () => {
   const [res] = useQuery({
     query: validateToken,
     variables: {
-      token: token,
+      token,
     },
   });
 

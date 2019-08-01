@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
 
-import { fontSizes, colors } from '~lib/theme';
 import dropDown from '~assets/images/dropDown.svg';
-import { setProject } from '~redux/actions/project';
 import * as Types from '~components/projects/types';
+import { colors, fontSizes } from '~lib/theme';
+import { setProject } from '~redux/actions/project';
 
 const ProjectSelect = styled.select`
   > img {

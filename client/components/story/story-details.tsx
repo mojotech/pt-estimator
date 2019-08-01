@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { colors, fontSizes, spacing } from '~lib/theme';
-import { Label as LabelType } from '~components/projects/types';
-import Star from '~assets/images/feature-icon.svg';
 import Bug from '~assets/images/bug-icon.svg';
 import Gear from '~assets/images/chore-icon.svg';
+import Star from '~assets/images/feature-icon.svg';
 import LinkArrow from '~assets/images/link-arrow.svg';
+import { Label as LabelType } from '~components/projects/types';
+import { colors, fontSizes, spacing } from '~lib/theme';
 
 const DetailsWrapper = styled.div`
   display: flex;
@@ -124,8 +124,12 @@ interface IconProps {
 }
 
 const TypeIcon = ({ type }: IconProps) => {
-  if (type === 'feature') return <FeatureIcon />;
-  if (type === 'bug') return <BugIcon />;
+  if (type === 'feature') {
+    return <FeatureIcon />;
+  }
+  if (type === 'bug') {
+    return <BugIcon />;
+  }
   return <ChoreIcon />;
 };
 

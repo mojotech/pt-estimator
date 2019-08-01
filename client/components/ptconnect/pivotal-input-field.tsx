@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { fonts, fontSizes, colors } from '~lib/theme';
 import RightUp from '~assets/images/right-arrow-full.svg';
+import { colors, fonts, fontSizes } from '~lib/theme';
 
 const Wrapper = styled.div`
   display: flex;

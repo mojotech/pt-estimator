@@ -1,9 +1,10 @@
+import { History } from 'history';
 import React from 'react';
 
 import OAuth from '~components/oauth/oauth';
 
 interface Props {
-  history: { push: Function };
+  history: History;
 }
 
 const OAuthFailure = ({ history }: Props) => {

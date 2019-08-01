@@ -1,17 +1,18 @@
+import { History } from 'history';
 import React from 'react';
 import { useStore } from 'react-redux';
 import { useQuery } from 'urql';
 
 import OAuth from '~/components/oauth/oauth';
-import TokenPrompt from '~components/oauth/token-prompt';
 import Homepage from '~components/Homepage';
+import TokenPrompt from '~components/oauth/token-prompt';
 
 const hasApiToken = `query HasApiToken {
   hasApiToken
 }`;
 
 interface Props {
-  history: { push: Function };
+  history: History;
 }
 
 const OAuthSuccess = ({ history }: Props) => {

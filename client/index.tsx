@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import ReactDOM from 'react-dom';
-import { Provider as UrqlProvider, Client } from 'urql';
 import { Provider as ReduxProvider, useSelector } from 'react-redux';
+import { Client, Provider as UrqlProvider } from 'urql';
 import App from '~/app';
 import store, { ReduxState } from './redux/reducers';
 

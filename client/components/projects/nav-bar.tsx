@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { fontSizes, colors, spacing } from '~lib/theme';
 import profileIcon from '~assets/images/profileIcon.png';
-import * as Types from '~components/projects/types';
 import ProjectsDropdown from '~components/projects/projects-dropdown';
+import * as Types from '~components/projects/types';
+import { colors, fontSizes, spacing } from '~lib/theme';
 
 const Header = styled.div`
   display: flex;

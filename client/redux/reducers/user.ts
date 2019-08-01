@@ -24,14 +24,14 @@ const initialState: User = {
 export const user = (state: User = initialState, action: UserAction): User => {
   switch (action.type) {
     case 'SET_USER':
-      const user = action.response.getBasicProfile();
+      const profile = action.response.getBasicProfile();
       return {
         ...state,
-        email: user.getEmail(),
-        name: user.getName(),
-        firstName: user.getGivenName(),
-        lastName: user.getFamilyName(),
-        imgUrl: user.getImageUrl(),
+        email: profile.getEmail(),
+        name: profile.getName(),
+        firstName: profile.getGivenName(),
+        lastName: profile.getFamilyName(),
+        imgUrl: profile.getImageUrl(),
       };
     default:
       return state;
