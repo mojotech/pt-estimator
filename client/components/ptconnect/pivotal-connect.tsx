@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { fonts, fontSizes, spacing } from '~lib/theme';
+import PTtoEstimator from '~assets/images/PTtoEstimator.png';
+import QuestionCircle from '~assets/images/question-circle.svg';
+import RightUpArrow from '~assets/images/right-up.svg';
 import APIExplanation from '~components/ptconnect/api-token-explanation';
 import PivotalInputField from '~components/ptconnect/pivotal-input-field';
-import PTtoEstimator from '~assets/images/PTtoEstimator.png';
-import RightUpArrow from '~assets/images/right-up.svg';
-import QuestionCircle from '~assets/images/question-circle.svg';
+import { fonts, fontSizes, spacing } from '~lib/theme';
 
 const TopBox = styled.div`
   width: 256px;

@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
-import { useMutation } from 'urql';
 import { useStore } from 'react-redux';
+import { useMutation } from 'urql';
 
 const addComment = `mutation AddComment($storyId: String!, $text: String!) {
   createComment(storyId: $storyId, text: $text) {

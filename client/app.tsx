@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import OAuthFailure from '~components/oauth/oauth-failure';
 import OAuthSuccess from '~components/oauth/oauth-success';
 import SignInPage from '~components/oauth/sign-in';

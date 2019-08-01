@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { colors, fonts, fontSizes } from '~lib/theme';
 import OAuth from '~components/oauth/oauth';
+import { colors, fonts, fontSizes } from '~lib/theme';
 
 const Title = styled.div`
   font-family: ${fonts.neueHass};

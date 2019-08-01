@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { colors, fontSizes, spacing } from '~lib/theme';
 import { Task as TaskType } from '~components/projects/types';
+import { colors, fontSizes, spacing } from '~lib/theme';
 
 interface TitleProps {
   noTasks?: boolean;

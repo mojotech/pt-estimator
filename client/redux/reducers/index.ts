@@ -1,6 +1,6 @@
-import { createStore, combineReducers } from 'redux';
-import { user } from './user';
+import { combineReducers, createStore } from 'redux';
 import { project } from './project';
+import { user } from './user';
 
 const reducers = combineReducers({
   user,

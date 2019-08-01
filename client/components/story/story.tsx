@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import Description from '~components/story/story-description';
-import Tasks from '~components/story/story-tasks';
-import Details from '~components/story/story-details';
-import { fontSizes, spacing } from '~lib/theme';
 import { Story as StoryType } from '~components/projects/types';
+import Description from '~components/story/story-description';
+import Details from '~components/story/story-details';
+import Tasks from '~components/story/story-tasks';
+import { fontSizes, spacing } from '~lib/theme';
 
 const StoryWrapper = styled.div`
   padding-top: 138px;
