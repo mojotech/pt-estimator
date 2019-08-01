@@ -22,7 +22,7 @@ const addComment = `mutation AddComment($storyId: String!, $text: String!) {
 }`;
 
 interface Props {
-  storyId: String;
+  storyId: string;
 }
 
 const NewComment = ({ storyId }: Props) => {

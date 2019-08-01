@@ -12,7 +12,7 @@ export interface Story {
   comments: Comment[];
   tasks: Task[];
   labels: Label[];
-  estimate: Number;
+  estimate: number;
 }
 
 export interface Comment {
