@@ -93,7 +93,8 @@ export const VotingView = ({ points, clickEvent, estimate }: VotingProps) => {
   return (
     <>
       {points.map((point, idx) => {
-        const isNoEst = point === "Can't estimate";
+        // prettier-ignore
+        const isNoEst = point === 'Can\'t estimate';
         return (
           <VoteButton noEst={isNoEst} selected={idx === estimate} onClick={() => clickEvent(idx)}>
             {isNoEst ? <NoEstIcon /> : null}
@@ -140,7 +141,8 @@ export const ResultsView = ({ points, clickEvent, estimate, users }: ResultsProp
   return (
     <ResultsGrid>
       {points.map((point, idx) => {
-        const isNoEst = point === "Can't estimate";
+        // prettier-ignore
+        const isNoEst = point === 'Can\'t estimate';
         const userVotes = allUsers.filter(user => user.vote === point);
         return (
           <>
