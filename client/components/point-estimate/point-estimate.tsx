@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import VotingView from '~components/point-estimate/point-views';
 import { colors, spacing } from '~lib/theme';
-import VotingView from './point-views';
+
 
 const TitleText = styled.div`
   font-size: 24px;
@@ -32,26 +33,12 @@ const SubText = styled.div<SubTextProps>`
   font-size: 16px;
   color: ${colors.warmGrey};
   opacity: 0.5;
-  margin-bottom: ${props => (props.skipVoting ? '5px' : '32px')};
+  margin-bottom: ${props => (props.skipVoting ? '5px' : `${spacing.xl}`)};
   text-align: center;
 `;
 
 SubText.defaultProps = {
   skipVoting: false,
-};
-
-const DividerWrapper = styled.svg`
-  margin-bottom: ${spacing.l};
-  height: 2px;
-  width: 100%;
-`;
-
-const Divider = () => {
-  return (
-    <DividerWrapper>
-      <rect width="100%" height="1" fill={`${colors.lightGrey}`} />
-    </DividerWrapper>
-  );
 };
 
 const ViewResults = () => (
@@ -68,15 +55,22 @@ interface PointEstimateProps {
   ptEst: number;
 }
 
-const PointEstimate = ({ ptEst }: PointEstimateProps) => (
-  <SidebarWrapper>
-    <TitleText>What's your estimate?</TitleText>
-    <Divider />
-    <VotingView points={defaultPoints} />
-    <SubText>2 of 4 people have voted</SubText>
-    <SubText skipVoting>Skip voting and view results</SubText>
-    <ViewResults />
-  </SidebarWrapper>
-);
+const PointEstimate = ({ ptEst }: PointEstimateProps) => {
+  const [estimate, setEstimate] = useState(null);
+
+  const selectPoint = index => {
+    setEstimate(index);
+  };
+
+  return (
+    <SidebarWrapper>
+      <TitleText>What's your estimate?</TitleText>
+      <VotingView points={defaultPoints} clickEvent={selectPoint} estimate={estimate} />
+      <SubText>2 of 4 people have voted</SubText>
+      <SubText skipVoting>Skip voting and view results</SubText>
+      <ViewResults />
+    </SidebarWrapper>
+  );
+};
 
 export default PointEstimate;
