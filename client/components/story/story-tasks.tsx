@@ -36,7 +36,7 @@ const TaskList = styled.ul`
 
 const TaskWrapper = styled.div`
   margin-bottom: 48px;
-  margin-left: ${spacing.xl};
+  margin-left: ${spacing.xxl};
 `;
 
 interface TasksProps {

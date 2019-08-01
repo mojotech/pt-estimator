@@ -5,7 +5,7 @@ import { colors, fonts, fontSizes, spacing } from '~lib/theme';
 const DescripWrapper = styled.div`
   display: inline-block;
   width: 656px;
-  margin-left: ${spacing.xl};
+  margin-left: ${spacing.xxl};
 `;
 const DescripTitle = styled.div`
   color: ${colors.black};
@@ -26,7 +26,7 @@ const DescripBody = styled.div<BodyProps>`
   white-space: pre-wrap;
   font-style: normal;
   line-height: 1.33;
-  margin-bottom: 32px;
+  margin-bottom: ${spacing.xl};
   opacity: ${props => (props.noDescrip ? '0.5' : '1')};
 `;
 
