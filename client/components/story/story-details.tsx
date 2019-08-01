@@ -124,8 +124,12 @@ interface IconProps {
 }
 
 const TypeIcon = ({ type }: IconProps) => {
-  if (type === 'feature') return <FeatureIcon />;
-  if (type === 'bug') return <BugIcon />;
+  if (type === 'feature') {
+    return <FeatureIcon />;
+  }
+  if (type === 'bug') {
+    return <BugIcon />;
+  }
   return <ChoreIcon />;
 };
 
