@@ -12,7 +12,7 @@ const DetailsWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   margin-bottom: 38px;
-  margin-left: ${spacing.xl};
+  margin-left: ${spacing.xxl};
   width: 656px;
 `;
 

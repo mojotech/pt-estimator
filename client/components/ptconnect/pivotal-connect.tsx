@@ -5,7 +5,7 @@ import QuestionCircle from '~assets/images/question-circle.svg';
 import RightUpArrow from '~assets/images/right-up.svg';
 import APIExplanation from '~components/ptconnect/api-token-explanation';
 import PivotalInputField from '~components/ptconnect/pivotal-input-field';
-import { fonts, fontSizes, spacing } from '~lib/theme';
+import { colors, fonts, fontSizes, spacing } from '~lib/theme';
 
 const TopBox = styled.div`
   width: 256px;
@@ -26,7 +26,7 @@ const Title = styled.div`
   font-family: ${fonts.neueHass};
   font-size: 30px;
   font-weight: 300;
-  margin-top: 32px;
+  margin-top: ${spacing.xl};
   margin-bottom: ${spacing.m};
 `;
 
@@ -52,7 +52,7 @@ const Column = styled.div`
 const UnderLine = styled.div`
   width: 275px;
   height: 2px;
-  background-color: #e1e1e1;
+  background-color: ${colors.lightGrey};
   align-self: center;
   margin-top: 5px;
 `;
@@ -60,7 +60,7 @@ const UnderLine = styled.div`
 const ProfileUnderLine = styled.div`
   width: 142px;
   height: 2px;
-  background-color: #e1e1e1;
+  background-color: ${colors.lightGrey};
   align-self: center;
   margin-top: 5px;
 `;
@@ -73,7 +73,7 @@ const Wrapper = styled.div`
 const TextButton = styled.button`
   border-color: #fafafa;
   background-color: #fafafa;
-  margin-top: 32px;
+  margin-top: ${spacing.xl};
   margin-bottom: ${spacing.l};
   align-self: center;
 `;

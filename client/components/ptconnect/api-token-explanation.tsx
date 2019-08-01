@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { spacing } from '~lib/theme';
 
 const TokenExplanationText = styled.div`
   font-family: neue-haas-unica, sans-serif;
@@ -62,7 +63,7 @@ const ExampleKeyText = styled.div`
   font-size: 13px;
   line-height: 1.62;
   color: #000000;
-  margin-right: 32px;
+  margin-right: ${spacing.xl};
 `;
 
 const WhiteRectangle = styled.div`
