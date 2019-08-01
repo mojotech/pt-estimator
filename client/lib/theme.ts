@@ -7,6 +7,7 @@ export const colors = {
 
 export const fonts = {
   neueHass: 'neue-hass-unica, sans-serif',
+  america: 'GT America',
 };
 
 export const fontSizes = {
