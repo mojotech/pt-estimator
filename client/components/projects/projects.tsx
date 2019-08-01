@@ -56,7 +56,8 @@ const Projects = () => {
   if (res.fetching) {
     return <>Loading GraphQL...</>;
   } else if (res.error) {
-    console.log(res.error);
+    // tslint:disable-next-line no-console
+    console.error(res.error);
     return <>GraphQL Error</>;
   }
 
