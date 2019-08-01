@@ -9,7 +9,6 @@ import { colors, fontSizes, spacing } from '~lib/theme';
 const StoryWrapper = styled.div`
   padding-top: 138px;
   padding-left: 138px;
-  overflow: hidden;
 `;
 
 const CommentTitle = styled.div`
