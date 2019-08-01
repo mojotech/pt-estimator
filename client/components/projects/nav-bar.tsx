@@ -31,7 +31,12 @@ const ProfileImage = styled.img`
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  align-self: center;
+  padding-bottom: ${spacing.s};
+  padding-top: ${spacing.s};
+
+  &:only-child {
+    margin-left: auto;
+  }
 `;
 
 interface NotificationProps {
@@ -70,12 +75,16 @@ const NavBar = ({ projects, stories }: Props) => {
   return (
     <>
       <Header>
-        <ProjectsDropdown projects={projects} />
-        <Notifications onClick={onClick} showStoryList={toggle}>
-          {storyPosition} of {stories.length}
-          <UnderLine />
-        </Notifications>
-        <ProfileImage src={state.user.imgUrl} />
+        {projects.length > 0 ? (
+          <>
+            <ProjectsDropdown projects={projects} />
+            <Notifications onClick={onClick} showStoryList={toggle}>
+              {storyPosition} of {stories.length}
+              <UnderLine />
+            </Notifications>
+          </>
+        ) : null}
+        <ProfileImage src={profileIcon} />
       </Header>
       {toggle && <StoryReviewList stories={stories} />}
     </>

@@ -5,6 +5,7 @@ import { ReduxState } from '~redux/reducers';
 
 import NavBar from '~components/projects/nav-bar';
 import Project from '~components/projects/project';
+import EmptyState from '~components/projects/empty-state';
 
 const fetchProjects = `query FetchProjects($filter: String!) {
   projects(filter: $filter) {
@@ -62,7 +63,7 @@ const Projects = () => {
   return (
     <>
       <NavBar projects={res.data.projects.all} stories={currentProject.stories} />
-      <Project />
+      {res.data.projects.all.length > 0 ? <Project /> : <EmptyState />}
     </>
   );
 };
