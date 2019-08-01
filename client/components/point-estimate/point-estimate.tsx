@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import VotingView from '~components/point-estimate/point-views';
+import { ResultsView, UserType, VotingView } from '~components/point-estimate/point-views';
 import { colors, spacing } from '~lib/theme';
-
 
 const TitleText = styled.div`
   font-size: 24px;
@@ -25,31 +24,59 @@ const SidebarWrapper = styled.div`
   right: 0;
 `;
 
-interface SubTextProps {
-  skipVoting?: boolean;
-}
-
-const SubText = styled.div<SubTextProps>`
+const SubText = styled.div`
   font-size: 16px;
   color: ${colors.warmGrey};
   opacity: 0.5;
-  margin-bottom: ${props => (props.skipVoting ? '5px' : `${spacing.xl}`)};
+  margin-bottom: ${spacing.xl};
   text-align: center;
 `;
 
-SubText.defaultProps = {
-  skipVoting: false,
+const EstText = styled(SubText)`
+  text-align: left;
+  opacity: 1;
+`;
+
+interface SkipTextProps {
+  resView: boolean;
+}
+
+const SkipVotingText = styled(SubText)<SkipTextProps>`
+  margin-bottom: ${props => (props.resView ? '5px' : '32px')};
+`;
+
+const DividerWrapper = styled.svg`
+  margin-bottom: ${spacing.l};
+  height: 2px;
+  width: 100%;
+`;
+
+const Divider = () => {
+  return (
+    <DividerWrapper>
+      <rect width="100%" height="1" fill={`${colors.lightGrey}`} />
+    </DividerWrapper>
+  );
 };
 
 const ViewResults = () => (
-  <svg width="100%" height="2" style={{ marginBottom: '224px', marginLeft: `${spacing.xxl}` }}>
+  <svg width="75%" height="2" style={{ marginBottom: '224px', marginLeft: `${spacing.xxl}` }}>
     <rect width="206" height="2" fill={`${colors.lightGrey}`} />
   </svg>
 );
 
+// prettier-ignore
 export type PointValue = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '8' | 'Can\'t estimate';
 
+// prettier-ignore
 const defaultPoints: PointValue[] = ['0', '1', '2', '3', '5', '8', 'Can\'t estimate'];
+
+const defaultUser: UserType[] = [
+  { id: 'cjoc', vote: '5' },
+  { id: 'emul', vote: '3' },
+  { id: 'mros', vote: '5' },
+  { id: 'ouse', vote: '3' },
+];
 
 interface PointEstimateProps {
   ptEst: number;
@@ -57,18 +84,39 @@ interface PointEstimateProps {
 
 const PointEstimate = ({ ptEst }: PointEstimateProps) => {
   const [estimate, setEstimate] = useState(null);
+  const [voted, setVoted] = useState(false);
 
   const selectPoint = index => {
     setEstimate(index);
+    setVoted(true);
+  };
+
+  const skipVoting = () => {
+    setVoted(true);
   };
 
   return (
     <SidebarWrapper>
       <TitleText>What's your estimate?</TitleText>
-      <VotingView points={defaultPoints} clickEvent={selectPoint} estimate={estimate} />
+      {voted ? (
+        <ResultsView
+          points={defaultPoints}
+          clickEvent={selectPoint}
+          estimate={estimate}
+          users={defaultUser}
+        />
+      ) : (
+        <VotingView points={defaultPoints} clickEvent={selectPoint} estimate={estimate} />
+      )}
       <SubText>2 of 4 people have voted</SubText>
-      <SubText skipVoting>Skip voting and view results</SubText>
-      <ViewResults />
+      {!voted ? (
+        <div onClick={skipVoting}>
+          <SkipVotingText resView={voted}>Skip voting and view results</SkipVotingText>
+          <ViewResults />
+        </div>
+      ) : (
+        <EstText>{`Pivotal Tracker: ${ptEst} points`}</EstText>
+      )}
     </SidebarWrapper>
   );
 };
