@@ -50,7 +50,7 @@ const Projects = () => {
 
   const [res] = useQuery({
     query: fetchProjects,
-    variables: { filter: 'label:"needs-review"' },
+    variables: { filter: `label:"${process.env.PT_LABEL}"` },
   });
 
   if (res.fetching) {
