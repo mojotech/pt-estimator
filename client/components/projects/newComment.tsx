@@ -34,7 +34,7 @@ const NewComment = ({ storyId }: Props) => {
 
   const onSubmit = event => {
     event.preventDefault();
-    executeMutation({ storyId: storyId, text: commentRef.current.value });
+    executeMutation({ storyId, text: commentRef.current.value });
     commentRef.current.value = '';
   };
 

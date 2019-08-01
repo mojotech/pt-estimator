@@ -22,7 +22,7 @@ const TokenPrompt = () => {
   const [res] = useQuery({
     query: validateToken,
     variables: {
-      token: token,
+      token,
     },
   });
 
