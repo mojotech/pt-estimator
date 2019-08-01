@@ -1,7 +1,7 @@
 export interface Project {
   id: number;
   name: string;
-  stories: Array<Story>;
+  stories: Story[];
 }
 
 export interface Story {
@@ -9,9 +9,9 @@ export interface Story {
   name: string;
   description: string;
   storyType: string;
-  comments: Array<Comment>;
-  tasks: Array<Task>;
-  labels: Array<Label>;
+  comments: Comment[];
+  tasks: Task[];
+  labels: Label[];
   estimate: Number;
 }
 
