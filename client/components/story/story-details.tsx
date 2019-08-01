@@ -146,7 +146,11 @@ const Details = ({ id, type, labels }: DetailsProps) => (
       {labels.map(label => (
         <Tag key={label.id}>{label.name}</Tag>
       ))}
-      <PTLink href={`https://www.pivotaltracker.com/story/show/${id}`}>
+      <PTLink
+        href={`https://www.pivotaltracker.com/story/show/${id}`}
+        target="_blank"
+        rel="noopener"
+      >
         <LinkWrapper>
           <ActionWrapper>
             <LinkText>View in Pivotal Tracker</LinkText>
