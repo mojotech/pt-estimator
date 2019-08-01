@@ -34,7 +34,7 @@ const OAuth = ({ history }: Props) => {
   };
 
   const oAuthFailure = () => {
-    history.push('/failure');
+    history.push('/');
   };
 
   return (
