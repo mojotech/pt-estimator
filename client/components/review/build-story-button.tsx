@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import { fontSizes, fonts, colors, spacing } from '~lib/theme';
-import { toggleStoryList } from '~redux/actions/toggle-story-list';
-import { setStory } from '~redux/actions/story';
 import { Story } from '~components/projects/types';
+import { colors, fonts, fontSizes, spacing } from '~lib/theme';
+import { setStory } from '~redux/actions/story';
+import { toggleStoryList } from '~redux/actions/toggle-story-list';
 
 const StoryRectangle = styled.div`
   display: flex;

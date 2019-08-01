@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import { fontSizes, colors } from '~lib/theme';
-import { setProject } from '~redux/actions/project';
 import * as Types from '~components/projects/types';
+import { colors, fontSizes } from '~lib/theme';
+import { setProject } from '~redux/actions/project';
 import { setStory } from '~redux/actions/story';
 
 const ProjectSelect = styled.select`

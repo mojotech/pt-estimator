@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { colors, fonts, fontSizes } from '~lib/theme';
 import LinkArrow from '~assets/images/link-arrow.svg';
+import { colors, fonts, fontSizes } from '~lib/theme';
 
 const Title = styled.div`
   font-family: ${fonts.neueHass};

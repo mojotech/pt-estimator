@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { fontSizes, fonts, colors, spacing } from '~lib/theme';
+import { colors, fonts, fontSizes, spacing } from '~lib/theme';
 
-import BuildStoryButton from '~components/review/build-story-button';
 import LinkArrow from '~assets/images/link-arrow-light.svg';
 import { Story } from '~components/projects/types';
+import BuildStoryButton from '~components/review/build-story-button';
 
 const labelName = 'needs-label';
 

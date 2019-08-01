@@ -1,8 +1,8 @@
 import { combineReducers, createStore } from 'redux';
-import { user } from './user';
 import { project } from './project';
-import { toggleStory } from './toggle-story-list';
 import { story } from './story';
+import { toggleStory } from './toggle-story-list';
+import { user } from './user';
 
 const reducers = combineReducers({
   user,

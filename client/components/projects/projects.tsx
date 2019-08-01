@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux';
 import { useQuery } from 'urql';
 import { ReduxState } from '~redux/reducers';
 
+import EmptyState from '~components/projects/empty-state';
 import NavBar from '~components/projects/nav-bar';
 import Project from '~components/projects/project';
-import EmptyState from '~components/projects/empty-state';
 
 const fetchProjects = `query FetchProjects($filter: String!) {
   projects(filter: $filter) {

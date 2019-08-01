@@ -1,12 +1,12 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import { fontSizes, colors, spacing, fonts } from '~lib/theme';
 import profileIcon from '~assets/images/profileIcon.png';
 import ProjectsDropdown from '~components/projects/projects-dropdown';
 import * as Types from '~components/projects/types';
 import StoryReviewList from '~components/review/story-review-list';
+import { colors, fonts, fontSizes, spacing } from '~lib/theme';
 import { toggleStoryList } from '~redux/actions/toggle-story-list';
 import { ReduxState } from '~redux/reducers';
 
