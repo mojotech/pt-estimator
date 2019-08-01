@@ -1,3 +1,4 @@
+import { History } from 'history';
 import React from 'react';
 import { useCookies } from 'react-cookie';
 import { GoogleLogin, GoogleLoginResponse } from 'react-google-login';
@@ -18,7 +19,7 @@ const Wrapper = styled.div`
 `;
 
 interface Props {
-  history: { push: Function };
+  history: History;
 }
 
 const OAuth = ({ history }: Props) => {

@@ -1,3 +1,4 @@
+import { History } from 'history';
 import React from 'react';
 import styled from 'styled-components';
 import OAuth from '~components/oauth/oauth';
@@ -34,7 +35,7 @@ const BodyText = styled.div`
 `;
 
 interface Props {
-  history: { push: Function };
+  history: History;
 }
 
 const SignInPage = ({ history }: Props) => {

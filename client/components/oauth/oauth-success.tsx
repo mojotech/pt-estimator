@@ -1,3 +1,4 @@
+import { History } from 'history';
 import React from 'react';
 import { useStore } from 'react-redux';
 import { useQuery } from 'urql';
@@ -11,7 +12,7 @@ const hasApiToken = `query HasApiToken {
 }`;
 
 interface Props {
-  history: { push: Function };
+  history: History;
 }
 
 const OAuthSuccess = ({ history }: Props) => {
