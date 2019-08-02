@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Comment as CommentType } from '~components/projects/types';
+import NewComment from '~components/story/new-comment';
 import { parseTimeAndDate } from '~lib/datetime';
 import { colors, fontSizes, spacing } from '~lib/theme';
 
@@ -117,10 +118,12 @@ const Comment = ({ comment }: CommentProp) => {
 };
 
 interface CommentsProps {
+  storyId: string;
+  projectId: string;
   comments: CommentType[];
 }
 
-const Comments = ({ comments }: CommentsProps) => {
+const Comments = ({ storyId, projectId, comments }: CommentsProps) => {
   const [showComments, setShowComments] = useState(false);
 
   return (
@@ -129,7 +132,14 @@ const Comments = ({ comments }: CommentsProps) => {
         <CommentTitle>{`Comments (${comments.length})`}</CommentTitle>
         <CommentDivider commentsShown={showComments} />
       </ShowComments>
-      {showComments && comments.map(comment => <Comment key={comment.id} comment={comment} />)}
+      {showComments && (
+        <>
+          <NewComment projectId={projectId} storyId={storyId} />
+          {comments.map(comment => (
+            <Comment key={comment.id} comment={comment} />
+          ))}
+        </>
+      )}
     </>
   );
 };
