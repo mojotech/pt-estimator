@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import PTtoEstimator from '~assets/images/PTtoEstimator.png';
 import QuestionCircle from '~assets/images/question-circle.svg';
 import RightUpArrow from '~assets/images/right-up.svg';
+import TokenPrompt from '~components/oauth/token-prompt';
 import APIExplanation from '~components/ptconnect/api-token-explanation';
-import PivotalInputField from '~components/ptconnect/pivotal-input-field';
+
 import { colors, fonts, fontSizes, spacing } from '~lib/theme';
 
 const TopBox = styled.div`
@@ -109,7 +110,7 @@ const PivotalConnect = () => {
           </TokenApperanaceText>
           <ProfileUnderLine />
         </TextButton>
-        <PivotalInputField />
+        <TokenPrompt />
         <TextButton onClick={() => toggleExplanationVisibility(!showExplanation)}>
           <TokenApperanaceText>
             <HelpButton />
