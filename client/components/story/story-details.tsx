@@ -12,14 +12,13 @@ const DetailsWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   margin-bottom: 38px;
-  margin-left: ${spacing.xl};
+  margin-left: ${spacing.xxl};
   width: 656px;
 `;
 
 const FeatureIcon = styled(Star)`
   width: 16px;
   height: auto;
-  fill: #ffb251;
   margin-right: ${spacing.s};
 `;
 
