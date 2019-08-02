@@ -2,7 +2,6 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import profileIcon from '~assets/images/profileIcon.png';
 import ProjectsDropdown from '~components/projects/projects-dropdown';
 import * as Types from '~components/projects/types';
 import StoryReviewList from '~components/review/story-review-list';
@@ -63,6 +62,7 @@ interface Props {
 }
 
 const NavBar = ({ projects, stories }: Props) => {
+  const image = useSelector((state: ReduxState) => state.user.imgUrl);
   const toggle = useSelector((state: ReduxState) => state.toggleStory.isVisible);
   const storyPosition = useSelector((state: ReduxState) => state.story.storyPosition);
 
@@ -84,7 +84,7 @@ const NavBar = ({ projects, stories }: Props) => {
             </Notifications>
           </>
         ) : null}
-        <ProfileImage src={profileIcon} />
+        <ProfileImage src={image} />
       </Header>
       {toggle && <StoryReviewList stories={stories} />}
     </>
