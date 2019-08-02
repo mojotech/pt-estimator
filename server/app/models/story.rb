@@ -35,14 +35,18 @@ class Story < ApplicationRecord
     pt_coms.sort_by { |c| c.created_at } .reverse
   end
 
-  def self.build_comment(com:)
-    { id: com.id, text: com.text, person_id: com.person_id,
+  def self.build_comment(com:, project_users:)
+    c_name = project_users.select{|u| u.id == com.person_id}.first.name
+    { id: com.id, text: com.text, person_name: c_name,
       created_at: com.created_at }
   end
 
-  def self.add_comment(token:, story_id:, text:)
+  def self.add_comment(token:, story_id:, text:, project_id:)
     client = TrackerApi::Client.new(token: token)
-    build_comment(com: client.story(story_id).create_comment(text: text))
-    client.story(story_id)
+    curr_proj = client.projects.select{ |p| p.id.to_s == project_id}.first
+    users = curr_proj.memberships.map{ |membership| membership.person}
+    build_comment(com: client.story(story_id).create_comment(text: text), project_users: users)
+    curr_story = Story.find(story_id)
+    curr_story.build_story(pt_story: client.story(story_id), project_users: users)
   end
 end

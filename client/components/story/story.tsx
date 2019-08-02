@@ -12,10 +12,12 @@ const StoryWrapper = styled.div`
 `;
 
 interface StoryProps {
+  projectId: string;
   data: StoryType;
 }
 
 const Story = ({
+  projectId,
   data: { id, name, description, storyType, comments, tasks, labels },
 }: StoryProps) => {
   return (
@@ -24,7 +26,7 @@ const Story = ({
         <Details id={id} type={storyType} labels={labels} />
         <Description title={name} text={description} />
         <Tasks tasks={tasks} />
-        <Comments comments={comments} />
+        <Comments storyId={id} projectId={projectId} comments={comments} />
       </StoryWrapper>
     </>
   );
