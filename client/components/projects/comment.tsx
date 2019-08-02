@@ -11,7 +11,7 @@ const Comment = ({ data }: Props) => {
     <>
       <h6>{data.text} </h6>
       <p>{data.createdAt}</p>
-      <p>person id: {data.personId}</p>
+      <p>person id: {data.personName}</p>
     </>
   );
 };

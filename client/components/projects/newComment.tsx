@@ -8,7 +8,7 @@ const addComment = `mutation AddComment($storyId: String!, $text: String!) {
       comments {
         createdAt
         id
-        personId
+        personName
         text
       }
     }
