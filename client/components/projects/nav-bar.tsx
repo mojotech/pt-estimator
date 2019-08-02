@@ -1,23 +1,14 @@
-import React, { useState } from 'react';
-import { useStore } from 'react-redux';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
+import profileIcon from '~assets/images/profileIcon.png';
 import ProjectsDropdown from '~components/projects/projects-dropdown';
 import * as Types from '~components/projects/types';
 import StoryReviewList from '~components/review/story-review-list';
-import StoryReview from '~components/review/story-review-type';
 import { colors, fonts, fontSizes, spacing } from '~lib/theme';
-
-const stories: StoryReview[] = [
-  {
-    storyName: 'Properties with existing Tenants attached them can’t be deleted',
-    estimateValue: 3,
-    storyID: 0,
-  },
-  { storyName: 'Welcome email (HTML)', estimateValue: 2, storyID: 1 },
-  { storyName: 'Make first and last name separate fields', estimateValue: null, storyID: 2 },
-  { storyName: 'Admin: edit resident away dates', estimateValue: null, storyID: 3 },
-];
+import { toggleStoryList } from '~redux/actions/toggle-story-list';
+import { ReduxState } from '~redux/reducers';
 
 const Header = styled.div`
   display: flex;
@@ -40,7 +31,12 @@ const ProfileImage = styled.img`
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  align-self: center;
+  padding-bottom: ${spacing.s};
+  padding-top: ${spacing.s};
+
+  &:only-child {
+    margin-left: auto;
+  }
 `;
 
 interface NotificationProps {
@@ -63,26 +59,34 @@ const UnderLine = styled.div`
 
 interface Props {
   projects: Types.Project[];
+  stories: Types.Story[];
 }
 
-const NavBar = ({ projects }: Props) => {
-  const [showStoryList, toggleStoryList] = useState(false);
-  const state = useStore().getState();
+const NavBar = ({ projects, stories }: Props) => {
+  const toggle = useSelector((state: ReduxState) => state.toggleStory.isVisible);
+  const storyPosition = useSelector((state: ReduxState) => state.story.storyPosition);
+
+  const dispatch = useDispatch();
+
+  const onClick = () => {
+    dispatch(toggleStoryList());
+  };
 
   return (
     <>
       <Header>
-        <ProjectsDropdown projects={projects} />
-        <Notifications
-          onClick={() => toggleStoryList(!showStoryList)}
-          showStoryList={showStoryList}
-        >
-          1 of {stories.length}
-          <UnderLine />
-        </Notifications>
-        <ProfileImage src={state.user.imgUrl} />
+        {projects.length > 0 ? (
+          <>
+            <ProjectsDropdown projects={projects} />
+            <Notifications onClick={onClick} showStoryList={toggle}>
+              {storyPosition} of {stories.length}
+              <UnderLine />
+            </Notifications>
+          </>
+        ) : null}
+        <ProfileImage src={profileIcon} />
       </Header>
-      {showStoryList && <StoryReviewList stories={stories} />}
+      {toggle && <StoryReviewList stories={stories} />}
     </>
   );
 };

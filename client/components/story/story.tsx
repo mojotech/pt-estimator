@@ -29,7 +29,7 @@ interface StoryProps {
 }
 
 const Story = ({
-  data: { id, name, description, storyType, comments, tasks, labels, estimate },
+  data: { id, name, description, storyType, comments, tasks, labels },
 }: StoryProps) => {
   return (
     <>

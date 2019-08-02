@@ -20,7 +20,7 @@ class Story < ApplicationRecord
       { id: t.id, description: t.description, complete: t.complete }
     end .compact
 
-    remove_review = pt_story.labels.reject{ |l| l.name == 'needs-review'}
+    remove_review = pt_story.labels.reject{ |l| l.name == ENV['PT_LABEL']}
     labels = remove_review.map do |l|
       {id: l.id, name: l.name}
     end .compact          

@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useQuery } from 'urql';
 import { ReduxState } from '~redux/reducers';
 
+import EmptyState from '~components/projects/empty-state';
 import NavBar from '~components/projects/nav-bar';
 import Project from '~components/projects/project';
 
@@ -50,21 +51,19 @@ const Projects = () => {
 
   const [res] = useQuery({
     query: fetchProjects,
-    variables: { filter: 'label:"needs-review"' },
+    variables: { filter: `label:"${process.env.PT_LABEL}"` },
   });
 
   if (res.fetching) {
     return <>Loading GraphQL...</>;
   } else if (res.error) {
-    // tslint:disable-next-line no-console
-    console.error(res.error);
     return <>GraphQL Error</>;
   }
 
   return (
     <>
-      <NavBar projects={res.data.projects.all} />
-      <Project key={currentProject.id} data={currentProject} />
+      <NavBar projects={res.data.projects.all} stories={currentProject.stories} />
+      {res.data.projects.all.length > 0 ? <Project /> : <EmptyState />}
     </>
   );
 };
