@@ -21,7 +21,7 @@ interface PanelProps {
 const StoryPanel = ({ data }: PanelProps) => (
   <PanelWrapper>
     <Story data={data} />
-    <PointEstimate />
+    <PointEstimate ptEst={3} />
   </PanelWrapper>
 );
 
