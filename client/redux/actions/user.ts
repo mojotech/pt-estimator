@@ -1,7 +1,14 @@
-import { GoogleLoginResponse } from 'react-google-login';
+interface Jwt {
+  email: string;
+  name: string;
+  given_name: string;
+  family_name: string;
+  picture: string;
+  loggedIn: boolean;
+}
 
-export const setUser = (newUserResponse: GoogleLoginResponse) =>
+export const setUser = (newUserResponse: Jwt) =>
   ({
     type: 'SET_USER',
-    response: newUserResponse,
+    token: newUserResponse,
   } as const);

@@ -1,5 +1,3 @@
-import { GoogleLoginResponse } from 'react-google-login';
-
 interface User {
   email: string;
   name: string;
@@ -11,9 +9,8 @@ interface User {
 
 interface UserAction {
   type: 'SET_USER';
-  response: GoogleLoginResponse;
+  token: Jwt;
 }
-
 const initialState: User = {
   email: '',
   name: '',
@@ -23,17 +20,25 @@ const initialState: User = {
   loggedIn: false,
 };
 
+interface Jwt {
+  email: string;
+  name: string;
+  given_name: string;
+  family_name: string;
+  picture: string;
+  loggedIn: boolean;
+}
+
 export const user = (state: User = initialState, action: UserAction): User => {
   switch (action.type) {
     case 'SET_USER':
-      const profile = action.response.getBasicProfile();
       return {
         ...state,
-        email: profile.getEmail(),
-        name: profile.getName(),
-        firstName: profile.getGivenName(),
-        lastName: profile.getFamilyName(),
-        imgUrl: profile.getImageUrl(),
+        email: action.token.email,
+        name: action.token.name,
+        firstName: action.token.given_name,
+        lastName: action.token.family_name,
+        imgUrl: action.token.picture,
         loggedIn: true,
       };
     default:

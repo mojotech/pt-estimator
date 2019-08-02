@@ -1,8 +1,10 @@
 import { History } from 'history';
+import jwtDecode from 'jwt-decode';
 import React from 'react';
 import { useCookies } from 'react-cookie';
 import { GoogleLogin, GoogleLoginResponse } from 'react-google-login';
 import { useDispatch } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import styled from 'styled-components';
 import { setUser } from '~redux/actions/user';
@@ -23,19 +25,39 @@ interface Props {
 }
 
 const OAuth = ({ history }: Props) => {
-  const [, setCookie] = useCookies(['jwt']);
+  const [cookie, setCookie] = useCookies(['jwt']);
 
   const dispatch = useDispatch();
 
   const oAuthSuccess = (response: GoogleLoginResponse) => {
     setCookie('jwt', response.getAuthResponse().id_token, { path: '/' });
-    dispatch(setUser(response));
+    const decodedJwt = jwtDecode(response.getAuthResponse().id_token);
+    dispatch(setUser(decodedJwt));
     history.push('/success');
   };
 
   const oAuthFailure = () => {
     history.push('/');
   };
+
+  const isSignedIn = () => {
+    if (cookie.jwt) {
+      return true;
+    }
+
+    return false;
+  };
+
+  const handleAuthStatus = () => {
+    const decodedJwt = jwtDecode(cookie.jwt);
+    dispatch(setUser(decodedJwt));
+
+    history.push('/success');
+  };
+
+  if (isSignedIn()) {
+    handleAuthStatus();
+  }
 
   return (
     <Wrapper>
