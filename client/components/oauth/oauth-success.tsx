@@ -25,7 +25,7 @@ const OAuthSuccess = ({ history }: Props) => {
   if (res.fetching) {
     return <>Loading GraphQL...</>;
   } else if (res.error) {
-    return <>GraphQL Error</>;
+    return <>{history.push('/')}</>;
   }
 
   if (state.user.email) {
