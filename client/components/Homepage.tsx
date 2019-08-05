@@ -11,7 +11,7 @@ const Homepage = ({ history }: Props) => {
   const store = useStore();
   const state = store.getState();
   if (state.user.loggedIn) {
-    return <Projects />;
+    return <Projects history={history} />;
   }
   return <>{history.push('/')}</>;
 };

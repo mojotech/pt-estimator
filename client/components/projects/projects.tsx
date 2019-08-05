@@ -1,8 +1,10 @@
+import { History } from 'history';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useQuery } from 'urql';
 import { ReduxState } from '~redux/reducers';
 
+import LogOut from '~components/oauth/logout';
 import EmptyState from '~components/projects/empty-state';
 import NavBar from '~components/projects/nav-bar';
 import Project from '~components/projects/project';
@@ -45,8 +47,11 @@ const fetchProjects = `query FetchProjects($filter: String!) {
     }
   }
 }`;
+interface Props {
+  history: History;
+}
 
-const Projects = () => {
+const Projects = ({ history }: Props) => {
   const currentProject = useSelector((state: ReduxState) => state.project);
 
   const [res] = useQuery({
@@ -63,6 +68,7 @@ const Projects = () => {
   return (
     <>
       <NavBar projects={res.data.projects.all} stories={currentProject.stories} />
+      <LogOut history={history} />
       {res.data.projects.all.length > 0 ? <Project /> : <EmptyState />}
     </>
   );
