@@ -25,7 +25,7 @@ interface Props {
 }
 
 const OAuth = ({ history }: Props) => {
-  const [cookie, setCookie] = useCookies(['jwt']);
+  const [cookie, setCookie, removeCookie] = useCookies(['jwt']);
 
   const dispatch = useDispatch();
 
@@ -42,10 +42,25 @@ const OAuth = ({ history }: Props) => {
 
   const isSignedIn = () => {
     if (cookie.jwt) {
-      return true;
+      if (!isJwtExpired()) {
+        return true;
+      }
+      removeCookie('jwt');
     }
 
     return false;
+  };
+
+  const isJwtExpired = () => {
+    const date = new Date();
+    const currentTime = date.getTime() / 1000;
+    const decodedJwt = jwtDecode(cookie.jwt);
+
+    if (currentTime < decodedJwt.exp) {
+      return false;
+    }
+
+    return true;
   };
 
   const handleAuthStatus = () => {
