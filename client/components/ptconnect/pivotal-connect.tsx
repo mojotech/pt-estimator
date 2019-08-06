@@ -1,3 +1,4 @@
+import { History } from 'history';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import PTtoEstimator from '~assets/images/PTtoEstimator.png';
@@ -89,7 +90,11 @@ const HelpButton = styled(QuestionCircle)`
   margin-right: 6px;
 `;
 
-const PivotalConnect = () => {
+interface Props {
+  history: History;
+}
+
+const PivotalConnect = ({ history }: Props) => {
   const [showExplanation, toggleExplanationVisibility] = useState(false);
 
   return (
@@ -110,7 +115,7 @@ const PivotalConnect = () => {
           </TokenApperanaceText>
           <ProfileUnderLine />
         </TextButton>
-        <TokenPrompt />
+        <TokenPrompt history={history} />
         <TextButton onClick={() => toggleExplanationVisibility(!showExplanation)}>
           <TokenApperanaceText>
             <HelpButton />
