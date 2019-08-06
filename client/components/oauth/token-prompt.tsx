@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react';
-import { useStore } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import { useQuery } from 'urql';
@@ -35,8 +34,6 @@ const AcceptBox = styled.input`
 `;
 
 const TokenPrompt = () => {
-  const state = useStore().getState();
-
   const [token, setToken] = useState();
   const tokenRef = useRef<HTMLInputElement>(null);
 
