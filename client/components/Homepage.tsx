@@ -1,5 +1,5 @@
 import { History } from 'history';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useStore } from 'react-redux';
 import Projects from '~components/projects/projects';
 
@@ -10,10 +10,17 @@ interface Props {
 const Homepage = ({ history }: Props) => {
   const store = useStore();
   const state = store.getState();
+
+  useEffect(() => {
+    if (!state.user.loggedIn) {
+      history.push('/');
+    }
+  });
+
   if (state.user.loggedIn) {
     return <Projects history={history} />;
   }
-  return <>{history.push('/')}</>;
+  return <>Loading...</>;
 };
 
 export default Homepage;
