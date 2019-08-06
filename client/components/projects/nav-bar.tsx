@@ -1,5 +1,5 @@
 import { History } from 'history';
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
@@ -16,7 +16,6 @@ const Header = styled.div`
   justify-content: space-between;
   background-color: ${colors.charcoal};
   padding-left: ${spacing.l};
-  padding-right: ${spacing.l};
 `;
 
 const NavButton = styled.button`
@@ -32,9 +31,8 @@ const ProfileImage = styled.img`
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  padding-bottom: ${spacing.s};
-  padding-top: ${spacing.s};
-
+  padding-bottom: 12px;
+  padding-top: 12px;
   &:only-child {
     margin-left: auto;
   }
@@ -49,6 +47,17 @@ const Notifications = styled(NavButton)<NotificationProps>`
   width: 124px;
   height: 57px;
   background-color: ${props => (props.showStoryList ? colors.warmGrey : colors.charcoal)};
+`;
+
+const Profile = styled.button`
+  width: 80px;
+  height: 57px;
+  background-color: ${colors.charcoal};
+  text-align: center;
+  outline: none;
+  :hover {
+    background-color: ${colors.warmGrey};
+  }
 `;
 
 const UnderLine = styled.div`
@@ -68,12 +77,16 @@ const NavBar = ({ projects, stories, history }: Props) => {
   const image = useSelector((state: ReduxState) => state.user.imgUrl);
   const toggle = useSelector((state: ReduxState) => state.toggleStory.isVisible);
   const storyPosition = useSelector((state: ReduxState) => state.story.storyPosition);
-
+  const [isProfileShowing, setProfileVisibility] = useState(false);
   const dispatch = useDispatch();
 
   const onClick = () => {
     dispatch(toggleStoryList());
   };
+
+  if (toggle && isProfileShowing) {
+    setProfileVisibility(false);
+  }
 
   return (
     <>
@@ -87,9 +100,11 @@ const NavBar = ({ projects, stories, history }: Props) => {
             </Notifications>
           </>
         ) : null}
-        <ProfileImage src={image} />
+        <Profile onClick={() => setProfileVisibility(!isProfileShowing)}>
+          <ProfileImage src={image} />
+        </Profile>
       </Header>
-      <ProfileDropDown history={history} />
+      {isProfileShowing && <ProfileDropDown history={history} />}
       {toggle && <StoryReviewList stories={stories} />}
     </>
   );
