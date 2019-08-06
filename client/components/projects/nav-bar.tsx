@@ -1,7 +1,9 @@
+import { History } from 'history';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
+import ProfileDropDown from '~components/projects/profile-dropdown';
 import ProjectsDropdown from '~components/projects/projects-dropdown';
 import * as Types from '~components/projects/types';
 import StoryReviewList from '~components/review/story-review-list';
@@ -59,9 +61,10 @@ const UnderLine = styled.div`
 interface Props {
   projects: Types.Project[];
   stories: Types.Story[];
+  history: History;
 }
 
-const NavBar = ({ projects, stories }: Props) => {
+const NavBar = ({ projects, stories, history }: Props) => {
   const image = useSelector((state: ReduxState) => state.user.imgUrl);
   const toggle = useSelector((state: ReduxState) => state.toggleStory.isVisible);
   const storyPosition = useSelector((state: ReduxState) => state.story.storyPosition);
@@ -86,6 +89,7 @@ const NavBar = ({ projects, stories }: Props) => {
         ) : null}
         <ProfileImage src={image} />
       </Header>
+      <ProfileDropDown history={history} />
       {toggle && <StoryReviewList stories={stories} />}
     </>
   );
