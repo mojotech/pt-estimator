@@ -13,7 +13,6 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   background-color: ${colors.charcoal};
-  padding-left: ${spacing.l};
   padding-right: ${spacing.l};
 `;
 
