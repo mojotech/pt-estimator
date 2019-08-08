@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 import * as Types from '~components/projects/types';
 import { colors, fonts, fontSizes } from '~lib/theme';
 import { setProject } from '~redux/actions/project';
 import { setStory } from '~redux/actions/story';
-import { ReduxState } from '~redux/reducers';
 
 import DropDown from '~assets/images/drop-down.svg';
 
@@ -97,11 +96,6 @@ const ProjectsDropdown = ({ projects }: Props) => {
     toggleVisibility(!isVisible);
     setProjectName(newProject.name);
   };
-
-  useEffect(() => {
-    dispatch(setProject(projects[0]));
-    dispatch(setStory(projects[0].stories[0], 1));
-  }, []);
 
   return (
     <>

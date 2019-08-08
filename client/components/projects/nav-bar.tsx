@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
@@ -8,6 +8,9 @@ import StoryReviewList from '~components/review/story-review-list';
 import { colors, fonts, fontSizes, spacing } from '~lib/theme';
 import { toggleStoryList } from '~redux/actions/toggle-story-list';
 import { ReduxState } from '~redux/reducers';
+
+import { setProject } from '~redux/actions/project';
+import { setStory } from '~redux/actions/story';
 
 const Header = styled.div`
   display: flex;
@@ -70,6 +73,11 @@ const NavBar = ({ projects, stories }: Props) => {
   const onClick = () => {
     dispatch(toggleStoryList());
   };
+
+  useEffect(() => {
+    dispatch(setProject(projects[0]));
+    dispatch(setStory(projects[0].stories[0], 1));
+  }, []);
 
   return (
     <>
