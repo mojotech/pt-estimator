@@ -1,5 +1,5 @@
 export interface Project {
-  id: number;
+  id: string;
   name: string;
   stories: Story[];
 }
@@ -18,7 +18,7 @@ export interface Story {
 export interface Comment {
   id: string;
   text: string;
-  personId: number;
+  personName: string;
   createdAt: Date;
 }
 

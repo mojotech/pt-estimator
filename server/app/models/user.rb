@@ -22,7 +22,7 @@ class User < ApplicationRecord
       pr.name = p.name
       pr.save!
       self.projects << pr
-      st = Story.filter_stories_to_review(pt_project: p, db_project: pr,
+      st = Story.filter_stories_to_review(pt_project: p, pt_members: p.memberships, db_project: pr,
                                           filter: filter)
       { id: pr[:id], name: pr[:name], stories: st } unless st.empty?
     end .compact
