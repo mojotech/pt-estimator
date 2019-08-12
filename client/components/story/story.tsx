@@ -8,6 +8,9 @@ import Details from '~components/story/story-details';
 import Tasks from '~components/story/story-tasks';
 import { colors, fontSizes, spacing } from '~lib/theme';
 
+import { useSelector } from 'react-redux';
+import { ReduxState } from '~redux/reducers';
+
 const StoryWrapper = styled.div`
   padding-top: 138px;
   padding-left: 138px;
@@ -30,18 +33,17 @@ interface StoryProps {
   data: StoryType;
 }
 
-const Story = ({
-  data: { id, name, description, storyType, comments, tasks, labels, userEstimates },
-}: StoryProps) => {
+const Story = ({ data }: StoryProps) => {
+  const currentStory = useSelector((state: ReduxState) => state.story);
   return (
     <>
       <StoryWrapper>
-        <Details id={id} type={storyType} labels={labels} />
-        <Description title={name} text={description} />
-        <Tasks tasks={tasks} />
-        <CommentTitle>{`Comments (${comments.length})`}</CommentTitle>
+        <Details id={data.id} type={data.storyType} labels={data.labels} />
+        <Description title={data.name} text={data.description} />
+        <Tasks tasks={data.tasks} />
+        <CommentTitle>{`Comments (${data.comments.length})`}</CommentTitle>
         <CommentDivider />
-        {userEstimates.map((est: Types.Estimate) => {
+        {currentStory.story.userEstimates.map((est: Types.Estimate) => {
           return (
             <div key={est.id}>
               <h4>User estimates</h4>
@@ -50,7 +52,7 @@ const Story = ({
             </div>
           );
         })}
-        <EstimateSelect storyId={id} />
+        <EstimateSelect story={data} />
       </StoryWrapper>
     </>
   );

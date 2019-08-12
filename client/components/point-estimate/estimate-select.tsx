@@ -1,8 +1,12 @@
 import React, { useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useMutation, useQuery } from 'urql';
 
+import { Story } from '~components/projects/types';
+import { Estimate } from '~components/projects/types';
 import { ReduxState } from '~redux/reducers';
+
+import { setStory } from '~redux/actions/story';
 
 const getValidEstimates = `query GetValidEstimates($projectId: String!) {
   pointingSchema(projectId: $projectId) {
@@ -30,21 +34,28 @@ const addEstimate = `mutation AddStoryEstimate($storyId: String!, $pointValue: I
 }`;
 
 interface Props {
-  storyId: string;
+  story: Story;
 }
 
-const EstimateSelect = ({ storyId }: Props) => {
+const EstimateSelect = ({ story }: Props) => {
   const currentProject = useSelector((state: ReduxState) => state.project);
   const currentUser = useSelector((state: ReduxState) => state.user);
+  const storyPosition = useSelector((state: ReduxState) => state.story.storyPosition);
+  const dispatch = useDispatch();
 
   const [, executeMutation] = useMutation(addEstimate);
 
   const onChange = e => {
+    const storyId = story.id;
     executeMutation({
       storyId,
       pointValue: parseInt(e.target.value, 10),
       userEmail: currentUser.email,
     });
+    if (story.userEstimates.length) {
+      story.userEstimates[0].pointValue = e.target.value;
+      dispatch(setStory(story, storyPosition));
+    }
   };
 
   const [res] = useQuery({
@@ -57,9 +68,13 @@ const EstimateSelect = ({ storyId }: Props) => {
   } else if (res.error) {
     return <>GraphQL Error</>;
   }
+  let userValue = '0';
+  if (story.userEstimates.length) {
+    userValue = story.userEstimates[0].pointValue.toString();
+  }
 
   return (
-    <select onChange={onChange}>
+    <select onChange={onChange} defaultValue={userValue}>
       {res.data.pointingSchema.all.map((value: number) => {
         return (
           <option key={value} value={value}>
