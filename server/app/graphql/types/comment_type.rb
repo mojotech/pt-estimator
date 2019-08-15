@@ -6,7 +6,7 @@ module Types
 
     field 'id', ID, null: false
     field 'text', String, null: false
-    field 'person_id', Integer, null: false
+    field 'person_name', String, null: false
     field 'created_at', UnixDateTimeType, null: false
   end
 end

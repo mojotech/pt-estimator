@@ -29,7 +29,7 @@ const fetchProjects = `query FetchProjects($filter: String!) {
           comments {
             id
             createdAt
-            personId
+            personName
             text
           }
           tasks {
@@ -69,7 +69,11 @@ const Projects = ({ history }: Props) => {
     <>
       <NavBar projects={res.data.projects.all} stories={currentProject.stories} />
       <LogOut history={history} />
-      {res.data.projects.all.length > 0 ? <Project /> : <EmptyState />}
+      {res.data.projects.all.length > 0 ? (
+        <Project projectId={currentProject.id} />
+      ) : (
+        <EmptyState />
+      )}
     </>
   );
 };

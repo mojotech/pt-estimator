@@ -15,12 +15,13 @@ const PanelWrapper = styled.div`
 `;
 
 interface PanelProps {
+  projectId: string;
   data: StoryType;
 }
 
-const StoryPanel = ({ data }: PanelProps) => (
+const StoryPanel = ({ projectId, data }: PanelProps) => (
   <PanelWrapper>
-    <Story data={data} />
+    <Story projectId={projectId} data={data} />
     <PointEstimate ptEst={3} />
   </PanelWrapper>
 );
