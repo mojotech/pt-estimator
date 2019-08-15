@@ -12,5 +12,6 @@ module Types
     field 'comments', [CommentType], null: false
     field 'estimate', Float, null: true
     field 'labels', [LabelType], null: true
+    field 'user_estimates', [EstimateType], null: true
   end
 end

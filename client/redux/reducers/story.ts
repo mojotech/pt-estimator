@@ -16,6 +16,7 @@ const initialState = {
     storyType: null,
     tasks: null,
     labels: null,
+    userEstimates: null,
   },
   storyPosition: null,
 };
