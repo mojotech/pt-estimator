@@ -1,6 +1,5 @@
-import React, { useRef, useState } from 'react';
-import { useStore } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { History } from 'history';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useQuery } from 'urql';
 
@@ -34,13 +33,21 @@ const AcceptBox = styled.input`
   background-color: #efefef;
 `;
 
-const TokenPrompt = () => {
-  const state = useStore().getState();
+interface Props {
+  history: History;
+}
 
+const TokenPrompt = ({ history }: Props) => {
   const [token, setToken] = useState();
   const tokenRef = useRef<HTMLInputElement>(null);
 
   const placeholder = 'API token';
+
+  useEffect(() => {
+    if (res.data && res.data.isApiTokenValid) {
+      history.push('/home');
+    }
+  });
 
   const onSubmit = event => {
     event.preventDefault();
@@ -53,10 +60,6 @@ const TokenPrompt = () => {
       token,
     },
   });
-
-  if (res.data && res.data.isApiTokenValid) {
-    return <Redirect to="/home" />;
-  }
 
   return (
     <Wrapper>

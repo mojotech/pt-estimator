@@ -1,7 +1,6 @@
 import { History } from 'history';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useStore } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import { useQuery } from 'urql';
 
 import PivotalConnect from '~components/ptconnect/pivotal-connect';
@@ -22,6 +21,18 @@ const OAuthSuccess = ({ history }: Props) => {
     query: hasApiToken,
   });
 
+  useEffect(() => {
+    if (res.data) {
+      if (state.user.email) {
+        if (res.data.hasApiToken === true) {
+          history.push('/home');
+        }
+      } else {
+        history.push('/');
+      }
+    }
+  });
+
   if (res.fetching) {
     return <>Loading GraphQL...</>;
   } else if (res.error) {
@@ -29,13 +40,11 @@ const OAuthSuccess = ({ history }: Props) => {
   }
 
   if (state.user.email) {
-    if (res.data.hasApiToken === true) {
-      return <Redirect to="/home" />;
-    } else {
-      return <PivotalConnect />;
+    if (res.data.hasApiToken !== true) {
+      return <PivotalConnect history={history} />;
     }
   }
-  return <>{history.push('/')}</>;
+  return <>Loading...</>;
 };
 
 export default OAuthSuccess;
