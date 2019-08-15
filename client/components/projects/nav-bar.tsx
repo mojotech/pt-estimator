@@ -1,7 +1,9 @@
-import React from 'react';
+import { History } from 'history';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
+import ProfileDropDown from '~components/projects/profile-dropdown';
 import ProjectsDropdown from '~components/projects/projects-dropdown';
 import * as Types from '~components/projects/types';
 import StoryReviewList from '~components/review/story-review-list';
@@ -14,7 +16,6 @@ const Header = styled.div`
   justify-content: space-between;
   background-color: ${colors.charcoal};
   padding-left: ${spacing.l};
-  padding-right: ${spacing.l};
 `;
 
 const NavButton = styled.button`
@@ -30,9 +31,8 @@ const ProfileImage = styled.img`
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  padding-bottom: ${spacing.s};
-  padding-top: ${spacing.s};
-
+  padding-bottom: 12px;
+  padding-top: 12px;
   &:only-child {
     margin-left: auto;
   }
@@ -49,6 +49,17 @@ const Notifications = styled(NavButton)<NotificationProps>`
   background-color: ${props => (props.showStoryList ? colors.warmGrey : colors.charcoal)};
 `;
 
+const Profile = styled.button`
+  width: 80px;
+  height: 57px;
+  background-color: ${colors.charcoal};
+  text-align: center;
+  outline: none;
+  :hover {
+    background-color: ${colors.warmGrey};
+  }
+`;
+
 const UnderLine = styled.div`
   width: 120%;
   height: 1px;
@@ -59,18 +70,23 @@ const UnderLine = styled.div`
 interface Props {
   projects: Types.Project[];
   stories: Types.Story[];
+  history: History;
 }
 
-const NavBar = ({ projects, stories }: Props) => {
+const NavBar = ({ projects, stories, history }: Props) => {
   const image = useSelector((state: ReduxState) => state.user.imgUrl);
   const toggle = useSelector((state: ReduxState) => state.toggleStory.isVisible);
   const storyPosition = useSelector((state: ReduxState) => state.story.storyPosition);
-
+  const [isProfileShowing, setProfileVisibility] = useState(false);
   const dispatch = useDispatch();
 
   const onClick = () => {
     dispatch(toggleStoryList());
   };
+
+  if (toggle && isProfileShowing) {
+    setProfileVisibility(false);
+  }
 
   return (
     <>
@@ -84,8 +100,11 @@ const NavBar = ({ projects, stories }: Props) => {
             </Notifications>
           </>
         ) : null}
-        <ProfileImage src={image} />
+        <Profile onClick={() => setProfileVisibility(!isProfileShowing)}>
+          <ProfileImage src={image} />
+        </Profile>
       </Header>
+      {isProfileShowing && <ProfileDropDown history={history} />}
       {toggle && <StoryReviewList stories={stories} />}
     </>
   );

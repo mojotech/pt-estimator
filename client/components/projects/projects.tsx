@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import { useQuery } from 'urql';
 import { ReduxState } from '~redux/reducers';
 
-import LogOut from '~components/oauth/logout';
 import EmptyState from '~components/projects/empty-state';
 import NavBar from '~components/projects/nav-bar';
 import Project from '~components/projects/project';
@@ -67,8 +66,7 @@ const Projects = ({ history }: Props) => {
 
   return (
     <>
-      <NavBar projects={res.data.projects.all} stories={currentProject.stories} />
-      <LogOut history={history} />
+      <NavBar projects={res.data.projects.all} stories={currentProject.stories} history={history} />
       {res.data.projects.all.length > 0 ? <Project /> : <EmptyState />}
     </>
   );
