@@ -3,12 +3,12 @@
 module Types
   class ProjectResponse < Types::BaseUnion
     description 'Possible responses for a project query'
-    possible_types ProjectCollectionType, ErrorType
+    possible_types ProjectCollectionType, PtErrorType
 
     def self.resolve_type(object, _context)
       if object.is_a?(Hash) &&
          %i[code kind error possible_fix].all?(&object.method(:key?))
-        ErrorType
+        PtErrorType
       else
         ProjectCollectionType
       end
